@@ -1,0 +1,22 @@
+{
+  "name": "my-blog",
+  "version": "1.0.0",
+  "description": "this is my blog project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huyanGit/my-blog.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "huyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huyanGit/my-blog/issues"
+  },
+  "homepage": "https://github.com/huyanGit/my-blog#readme"
+}
