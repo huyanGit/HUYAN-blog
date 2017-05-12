@@ -18,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/huyanGit/my-blog/issues"
   },
-  "homepage": "https://github.com/huyanGit/my-blog#readme"
+  "homepage": "https://github.com/huyanGit/my-blog#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "crypto": "0.0.3",
+    "easy-copy": "^1.0.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.8",
+    "some-http-error": "^0.2.0"
+  }
 }
