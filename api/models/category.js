@@ -13,7 +13,18 @@ CategorySchema.pre('save', next => {
 });
 
 CategorySchema.statics = {
-
+	updateCategory: function (category) {
+		return category.save();
+	},
+	findAllCategory: function () {
+		return this.find({}).exec();
+	},
+	findCategoryById: function (categoryId) {
+		return this.findById(categoryId).exec();
+	},
+	deleteCategoryById: function (categoryId) {
+		return this.remove({_id: categoryId}).exec();
+	}
 };
 
 const Category = mongoose.model('Category', CategorySchema);

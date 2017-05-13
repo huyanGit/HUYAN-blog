@@ -17,16 +17,22 @@ BlogSchema.pre('save', next => {
 })
 BlogSchema.statics = {
 	findBlogByQuery: function (query, obt) {
-		return this.find(query, {}, obt).exec();
+		return this.find(query, {}, obt).populate(['category', 'tags']).exec();
 	},
 	findBlogById: function (blogId) {
-		return this.findById(blogId).exec();
+		return this.findById(blogId).populate(['category', 'tags']).exec();
 	},
 	updateBlog: function (blog) {
-		return blog.save(blog);
+		return blog.save();
 	},
 	deleteBlogById: function (blogId) {
 		return this.remove({_id: blogId}).exec();
+	},
+	deleteCategoryInBlog: function (categoryId) {
+		return this.update({category: categoryId}, {$unset: {categoryId: 1}}, {multi: 1});
+	},
+	deleteTagInBlog: function (tagId) {
+		return this.update({tags: tagId}, {$pull: {tags: tagId}}, {multi: 1});
 	}
 };
 
