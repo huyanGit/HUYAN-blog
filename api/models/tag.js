@@ -13,7 +13,18 @@ TagSchema.pre('save', next => {
 });
 
 TagSchema.statics = {
-
+	createTag: function (tag) {
+		return tag.save();
+	},
+	findAllTags: function () {
+		return this.find({}).exec();
+	},
+	findTagById: function(tagId) {
+		return this.findById(tagId).exec();
+	},
+	deleteTagById: function (tagId) {
+		return this.remove({_id: tagId}).exec();
+	}
 };
 
 const Tag = mongoose.model('Tag', TagSchema);
