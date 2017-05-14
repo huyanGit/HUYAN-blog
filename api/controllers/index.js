@@ -4,38 +4,38 @@ const blogController = require('./blog');
 const categoryController = require('./category');
 const tagController = require('./tag');
 const adminController = require('./admin');
-
+const adminRequired = require('../middlewares').auth.adminRequired;
 router.route('/blog')
 	.get(blogController.getBlogs)
-	.post(blogController.addOneBlog)
+	.post(adminRequired, blogController.addOneBlog)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
 router.route('/blog/:blogId')
 	.get(blogController.getOneBlog)
-	.put(blogController.updateOneBlog)
-	.delete(blogController.removeOneBlog)
+	.put(adminRequired, blogController.updateOneBlog)
+	.delete(adminRequired, blogController.removeOneBlog)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
 router.route('/category')
 	.get(categoryController.getCategory)
-	.post(categoryController.addCategory)
+	.post(adminRequired, categoryController.addCategory)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
 router.route('/category/:categoryId')
 	.get(categoryController.getOneCategory)
-	.put(categoryController.updateOneCategory)
-	.delete(categoryController.deleteOneCategory)
+	.put(adminRequired, categoryController.updateOneCategory)
+	.delete(adminRequired, categoryController.deleteOneCategory)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
 router.route('/tag')
 	.get(tagController.getAllTags)
-	.post(tagController.addOneTag)
+	.post(adminRequired, tagController.addOneTag)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
 router.route('/tag/:tagId')
 	.get(tagController.getOneTag)
-	.put(tagController.updateOneTag)
-	.delete(tagController.deleteOneTag)
+	.put(adminRequired, tagController.updateOneTag)
+	.delete(adminRequired, tagController.deleteOneTag)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
 router.route('/admin/authorization')

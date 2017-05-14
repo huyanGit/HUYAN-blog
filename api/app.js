@@ -10,6 +10,7 @@ mongoose.connect(configs.mongodb);
 app.use(middlewares.response);
 app.use(middlewares.list);
 app.use(bodyParser.json());
+app.use(middlewares.auth.authorization);
 app.use(controllers);
 app.use(middlewares.errorHeadling);
 

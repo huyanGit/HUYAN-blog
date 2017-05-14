@@ -14,6 +14,10 @@ exports.create = (obj, time, cert) => {
 //verify token
 exports.verify = (token, cert, callback) => {
 	return new Promise ((resolve, reject) => {
+		if (typeof cert === 'function') {
+      callback = cert;
+      cert = configs.jwt_cert;
+    }
 		jwt.verify(token, cert, (err, decoded) => {
 			if(err) {
 				reject(err);
