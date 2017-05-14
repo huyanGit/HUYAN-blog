@@ -24,6 +24,7 @@
     "crypto": "0.0.3",
     "easy-copy": "^1.0.1",
     "express": "^4.15.2",
+    "jsonwebtoken": "^7.4.0",
     "mongoose": "^4.9.8",
     "some-http-error": "^0.2.0"
   }

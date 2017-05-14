@@ -3,6 +3,7 @@ const HttpError = require('some-http-error');
 const blogController = require('./blog');
 const categoryController = require('./category');
 const tagController = require('./tag');
+const adminController = require('./admin');
 
 router.route('/blog')
 	.get(blogController.getBlogs)
@@ -37,6 +38,10 @@ router.route('/tag/:tagId')
 	.delete(tagController.deleteOneTag)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
+router.route('/admin/authorization')
+	.post(adminController.authorize)
+	.all(() => {throw new HttpError.MethodNotAllowedError()});
+	
 module.exports = router;
 
 
