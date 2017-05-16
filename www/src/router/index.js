@@ -5,6 +5,7 @@ import Category from '../components/category/Category'
 import Tag from '../components/tag/Tag'
 import Archive from '../components/archive/Archive'
 import About from '../components/about/About'
+import Notfound from '../components/Notfound'
 Vue.use(Router);
 
 const routes = [
@@ -27,7 +28,11 @@ const routes = [
 	{
 		path: '/about',
 		component: About
-	},				
+	},
+	{
+		path:'/*',
+		component: Notfound
+	}				
 ];
 
 export default new Router({

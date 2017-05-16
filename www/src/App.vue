@@ -2,14 +2,14 @@
   <div id="app">
     <nav class="nav">
       <div class="container">
-        <div class="logo">HUYAN_blog</div>
+        <div class="logo">HUYAN_Blog</div>
         <div class="nav-link">
           <ul>
             <li><router-link to="/"><span class="glyphicon glyphicon-home icon"></span>首页</router-link></li>
             <li><router-link to="/category"><span class="glyphicon glyphicon-book icon"></span>分类</router-link></li>
             <li><router-link to="/tag"><span class="glyphicon glyphicon-tags icon"></span>标签</router-link></li>
             <li><router-link to="/archive"><span class="glyphicon glyphicon-briefcase icon"></span>归档</router-link></li>
-            <li><router-link to="/about"><span class="glyphicon glyphicon-random icon"></span>关于</router-link></li>
+            <li><router-link to="/about"><span class="glyphicon glyphicon-user icon"></span>关于</router-link></li>
           </ul> 
         </div>
         <div class="menu">
@@ -44,6 +44,14 @@ body{
   perspective: 0;
   font-family:  'Microsoft YaHei';
 }
+#app{
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+}
+.content{
+  padding-bottom: 60px;
+}
 .nav{
   height: 80px;
   width: 100%;
@@ -54,7 +62,7 @@ body{
   font-size: 16px;
   line-height: 80px;
 }
-ul li{
+.nav ul li{
   list-style: none;
   display: inline;
   margin: 0 5px;
@@ -78,13 +86,14 @@ a:focus, a:hover {
   display: none;
 }
 .footer{
-  height: 100px;
+  height: 60px;
   width: 100%;
-  line-height: 100px;
+  line-height: 60px;
   text-align: center;
   font-size: 15px;
   background-color: #eee;
-  position: absolute;
-  bottom:0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 </style>
