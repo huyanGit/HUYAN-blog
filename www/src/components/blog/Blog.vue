@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="blog">
 	  <div class="blog-list" v-for = "blog in blogs">
 			<div class="blog">
 				<div class="blog-head">
@@ -43,7 +43,7 @@ export default {
   		return timeFilter(time).substr(0, 10);
   	},
   	blogLengthFilter: function(content, length){
-  		return blogLengthFilter(content, length) + '······';
+  		return blogLengthFilter(content, length) + '···';
   	}
   },
   created() {
@@ -55,7 +55,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .blog-list{
-	width: 800px;
+	width: inherit;
 	margin: 30px auto;
 }
 .blog-head{

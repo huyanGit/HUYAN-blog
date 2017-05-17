@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- 导航栏 -->
-    <nav class="nav">
+    <nav class="nav" :class="{active: isActive}">
       <div class="container">
         <div class="logo"><router-link to="/">HUYAN_BLOG</router-link></div>
         <div class="nav-link">
@@ -19,19 +19,19 @@
           <span class="glyphicon glyphicon-search search-icon"></span>
         </div>
         <!-- 下拉菜单按钮 -->
-        <div class="menu">
+        <div class="menu" @click="dropdown()">
           <span class="glyphicon glyphicon-menu-hamburger"></span>
         </div>
       </div>
       <!-- 下拉菜单 -->
       <transition name="drop">
-        <div class="drop-nav-box" v-if='showDropNav'>
+        <div class="drop-nav-box" v-if="showDropNav">
           <div class="drop-nav">
-            <router-link to='/home'>首页</router-link>
-            <router-link to='/category'>分类</router-link>
-            <router-link to='/tag'>标签</router-link>
-            <router-link to='/pigeonhole'>归档</router-link>
-            <router-link to='/about'>关于</router-link>
+            <router-link to="/">首页</router-link>
+            <router-link to="/category">分类</router-link>
+            <router-link to="/tag">标签</router-link>
+            <router-link to="/archive">归档</router-link>
+            <router-link to="/about">关于</router-link>
           </div>
         </div>
       </transition>  
@@ -51,7 +51,15 @@
 export default {
   data (){
     return {
+      isActive: false,
+      showDropNav: false,
       year: new Date().getUTCFullYear()
+    }
+  },
+  methods: {
+    dropdown: function(){
+      this.showDropNav = !this.showDropNav;
+      this.isActive = !this.isActive;
     }
   }
 }
@@ -60,6 +68,12 @@ export default {
 <style>
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
+.drop-enter-active, .drop-leave-active {
+  transition: opacity .5s
+}
+.drop-enter, .drop-leave-active {
+  opacity: 0
+}
 body{
   margin: 0;
   perspective: 0;
@@ -74,7 +88,11 @@ a{
   min-height: 100%;
 }
 .container{
-  width: 800px;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 80px;  
+  width: inherit;
   margin: 0 auto;
   padding: 0;
 }
@@ -87,12 +105,7 @@ a{
   width: 100%;
   background-color: #eee;
 }
-.nav .container{
-  display: flex;
-  font-size: 16px;
-  line-height: 80px;
-}
-.nav ul li{
+.nav-link ul li{
   list-style: none;
   display: inline;
   margin: 0 5px;
@@ -131,7 +144,7 @@ a:focus, a:hover {
 }
 .menu{
   display: none;
-  color:#337ab7;
+  color:#1D8CE0;
 }
 .footer{
   color: #555;
@@ -144,5 +157,43 @@ a:focus, a:hover {
   position: relative;
   bottom: 0;
   left: 0;
+}
+.active{
+  height: 95px;
+}
+/*媒体查询 响应式*/
+@media screen and (max-width: 900px) {
+  .search{
+    display: none;
+  }
+  .content{
+    width: 90%;
+    margin: 30px auto;
+  }
+  .container{
+    justify-content: space-between;
+  }
+}
+@media screen and (max-width: 550px) {
+  .nav-link{
+    display: none;
+  }
+  .menu{
+    display: block;
+  }
+  .drop-nav{
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    font-size: 16px;
+    background-color: #eee;
+  }
+  .drop-nav a{
+    margin: 0 10px;
+  }
+  .logo,.container{
+    height: 50px;
+    line-height: 70px;
+  }
 }
 </style>
