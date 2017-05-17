@@ -3,17 +3,19 @@
 	  <div class="blog-list" v-for = "blog in blogs">
 			<div class="blog">
 				<div class="blog-head">
-					<div class="blog-title"><a>{{blog.title}}</a></div>
+					<div class="blog-title"><router-link :to="'/blog/' + blog._id">{{blog.title}}</router-link></div>
 			    <div class="b_data">
-			    	<span class="b_span"><span class="glyphicon glyphicon-book icon"></span><span>前端</span></span>
-			    	<span class="b_span"><span class="glyphicon glyphicon-calendar icon"></span><span>2016-12-31</span></span>
-			    	<span class="b_span"><span class="glyphicon glyphicon-tag icon"></span><span>JavaScript</span></span>
+			    	<span class="b_span"><span class="glyphicon glyphicon-book"></span><span class="icon">{{blog.category}}</span></span>
+			    	<span class="b_span"><span class="glyphicon glyphicon-calendar"></span><span class="icon">{{blog.create_at | timeFilter}}</span></span>
+			    	<span class="b_span"><span class="glyphicon glyphicon-tag"></span><span v-for="tag in blog.tags" class="icon">{{tag}}</span></span>
 		    	</div>
 		    </div>
 		    <div class="blog-content">
-		    	<p>{{blog.content}}</p>
+		    	<p>{{blog.content | blogLengthFilter(150)}}</p>
 		    </div>
-		    <div class="blog-findall"><a href="">查看全文</a></div>
+		    <div class="blog-findall">
+		    	<router-link :to="'/blog/' + blog._id">查看原文</router-link>
+		    </div>
 			</div>
 	  </div>
 	 </div> 
@@ -21,6 +23,7 @@
 
 <script>
 import blogResource from '../../axios/blog'
+import {blogLengthFilter, timeFilter} from '../../utils/filters'
 export default {
   data () {
     return {
@@ -33,6 +36,14 @@ export default {
   		blogResource.getBlogs().then(function(res){
   			vm.blogs = res.data;
   		});
+  	}
+  },
+  filters: {
+  	timeFilter: function(time){
+  		return timeFilter(time).substr(0, 10);
+  	},
+  	blogLengthFilter: function(content, length){
+  		return blogLengthFilter(content, length) + '······';
   	}
   },
   created() {
@@ -63,10 +74,8 @@ export default {
   font-size: 12px;
   line-height: 2;
 }
-.b_data .icon{
-	margin-right: 3px;
-}
-.b_span{
-	margin-right: 8px;
+.icon{
+	padding: 0 8px;
+	margin: 0;
 }
 </style>
