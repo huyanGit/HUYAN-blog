@@ -5,9 +5,9 @@
 				<div class="blog-head">
 					<div class="blog-title"><router-link :to="'/blog/' + blog._id">{{blog.title}}</router-link></div>
 			    <div class="b_data">
-			    	<span class="b_span"><span class="glyphicon glyphicon-book"></span><span class="icon">{{blog.category}}</span></span>
+			    	<span class="b_span"><span class="glyphicon glyphicon-book"></span><span class="icon">{{blog.category.category_name}}</span></span>
 			    	<span class="b_span"><span class="glyphicon glyphicon-calendar"></span><span class="icon">{{blog.create_at | timeFilter}}</span></span>
-			    	<span class="b_span"><span class="glyphicon glyphicon-tag"></span><span v-for="tag in blog.tags" class="icon">{{tag}}</span></span>
+			    	<span class="b_span"><span class="glyphicon glyphicon-tag"></span><span v-for="tag in blog.tags" class="icon">{{tag.tag_name}}</span></span>
 		    	</div>
 		    </div>
 		    <div class="blog-content">
