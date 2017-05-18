@@ -1,14 +1,13 @@
 <template>
   <div>
-    <div v-for="item in category">
+    <div v-for="item in categories">
     	<div>
-    		<span class="category-name">{{item.category_name}}</span>
-    		<span class="blog-number">(共有4篇文章)</span>
+    		<router-link :to="'/category/' + item._id" class="category-name">{{item.category_name}}</router-link>
+    		<span class="blog-number">(共有{{item.count}}篇文章)</span>
     	</div>
-    	<div class="blog-list" v-for="blog in blogs">
-    		<div class="blog">
-    			<span>{{blog.created_at}}</span>
-    			<span>{{blog.title}}</span>
+    	<div class="blog-list">
+    		<div class="blog" v-for="blog in item.blogs">
+    			<router-link :to="'/blog/' + blog._id">{{blog.create_at | timeFilter}} {{blog.title}}</router-link>
     		</div>
     	</div>
     </div>
@@ -16,25 +15,29 @@
 </template>
 
 <script>
+import categoryResource from '../../axios/category'
+import {timeFilter} from '../../utils/filters'
 export default {
   data () {
     return {
-      category:[{category_name: '前端'}],
-      blogs:[{
-	      	title: "Vue.js学习笔记",
-	      	created_at:'2017-5-16'
-	      },
-	      {
-	      	title: "Vue.js学习笔记",
-	      	created_at:'2017-5-16'
-	      },
-	      {
-	      	title: "Vue.js学习笔记",
-	      	created_at:'2017-5-16'
-	      }
-      ]
-
+      categories:[]
     }
+  },
+  methods: {
+    getCategories: function () {
+      var vm = this;
+      return categoryResource.getCategories().then(function(res){
+        vm.categories = res.data;
+      });
+    }
+  },
+  filters: {
+    timeFilter: function(time){
+      return timeFilter(time).substr(0,10);
+    }
+  },
+  created(){
+    return this.getCategories();
   }
 }
 </script>
