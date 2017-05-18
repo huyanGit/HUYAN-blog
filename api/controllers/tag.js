@@ -12,7 +12,7 @@ tagControllers.addOneTag = (req, res, next) => {
 
 //find all tags
 tagControllers.getAllTags = (req, res, next) => {
-	Tag.findAllTags().then(tags => {
+	Tag.getTagsWithBlogCount().then(tags => {
 		res.success(tags);
 	});
 };

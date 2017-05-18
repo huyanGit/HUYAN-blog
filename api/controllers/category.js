@@ -12,7 +12,7 @@ categoryControllers.addCategory = (req, res, next) => {
 
 //find all category
 categoryControllers.getCategory = (req, res, next) => {
-	Category.findAllCategory().then(category => {
+	Category.getCategoryWithBlogCount().then(category => {
 		res.success(category);
 	}).catch(next);
 };

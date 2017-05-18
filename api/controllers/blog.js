@@ -5,6 +5,7 @@ const blogController = {};
 
 blogController.getBlogs = (req, res, next) => {
 	const obt = req.pageObj;
+	obt.sort = {'create_at': -1};
 	Blog.findBlogByQuery({}, obt).then(blogs => {
 		res.success(blogs, 200);
 	}).catch(next);
