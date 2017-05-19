@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div class="category">
     <div v-for="item in categories">
     	<div>
-    		<router-link :to="'/category/' + item._id" class="category-name">{{item.category_name}}</router-link>
+    		<span class="category-name">{{item.category_name}}</span>
     		<span class="blog-number">(共有{{item.count}}篇文章)</span>
     	</div>
     	<div class="blog-list">
     		<div class="blog" v-for="blog in item.blogs">
-    			<router-link :to="'/blog/' + blog._id">{{blog.create_at | timeFilter}} {{blog.title}}</router-link>
+          <span class="time">{{blog.create_at | timeFilter}} </span>
+    			<router-link :to="'/blog/' + blog._id">{{blog.title}}</router-link>
     		</div>
     	</div>
     </div>
@@ -54,10 +55,15 @@ export default {
   margin-left: 10px;
   color: #999;
 }
-.blog{
-	font-size: 14px;
+.blog {
+	font-size: 15px;
 	color: #555;
 	margin: 13px;
 
+}
+.time{
+  margin-right:15px;
+  font-size: 14px;
+  color: #555;
 }
 </style>

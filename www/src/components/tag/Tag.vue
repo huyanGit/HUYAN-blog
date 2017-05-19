@@ -2,7 +2,7 @@
   <div class="tag">
     <div class="tag_num">共有{{tags.length}}个标签：</div>
     <ul>
-    	<li :style="{fontSize: tag.count + 12 + 'px'}" v-for="tag in tags"><router-link to="#">{{tag.tag_name}}</router-link></li>
+    	<li :style="{fontSize: tag.count + 15 + 'px'}" v-for="tag in tags"><router-link to="#">{{tag.tag_name}}</router-link></li>
     </ul>
   </div>
 </template>
@@ -42,6 +42,6 @@ li{
 	margin-bottom: 5px;
 }
 .tag ul{
-	padding:10px;
+	padding:50px;
 }
 </style>

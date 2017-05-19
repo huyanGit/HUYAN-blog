@@ -44,7 +44,7 @@ export default {
 <style scoped>
 .blog-archive{
 	width: 800px;
-	margin: 30px auto;
+	margin: 30px auto; 
 }
 .year{
 	font-size: 22px;

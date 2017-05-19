@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <!-- 导航栏 -->
-    <nav class="nav" :class="{active: isActive}">
+    <nav class="nav">
       <div class="container">
         <div class="logo"><router-link to="/">HUYAN_BLOG</router-link></div>
         <div class="nav-link">
@@ -13,18 +12,15 @@
             <li><router-link to="/about"><span class="glyphicon glyphicon-user icon"></span>关于</router-link></li>
           </ul> 
         </div>
-        <!-- 搜索框 -->
         <div class="search">
           <input type="search" class="search-area" placeholder="搜索标题或关键词">
           <span class="glyphicon glyphicon-search search-icon"></span>
         </div>
-        <!-- 下拉菜单按钮 -->
         <div class="menu" @click="dropdown()">
           <span class="glyphicon glyphicon-menu-hamburger"></span>
         </div>
       </div>
-      <!-- 下拉菜单 -->
-      <transition name="drop">
+      <transition name="bounce">
         <div class="drop-nav-box" v-if="showDropNav">
           <div class="drop-nav">
             <router-link to="/">首页</router-link>
@@ -36,11 +32,9 @@
         </div>
       </transition>  
     </nav>
-    <!-- 正文 -->
     <div class="content">
       <router-view></router-view>
     </div>
-    <!-- 尾部版权 -->
     <footer class="footer">
       <div class="copyright">Copyright &copy {{year}} HUYAN</div>
     </footer>
@@ -51,7 +45,6 @@
 export default {
   data (){
     return {
-      isActive: false,
       showDropNav: false,
       year: new Date().getUTCFullYear()
     }
@@ -59,7 +52,6 @@ export default {
   methods: {
     dropdown: function(){
       this.showDropNav = !this.showDropNav;
-      this.isActive = !this.isActive;
     }
   }
 }
@@ -67,12 +59,33 @@ export default {
 
 <style>
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
-.drop-enter-active, .drop-leave-active {
-  transition: opacity .5s
+.bounce-enter-active {
+  animation: bounce-in .5s;
 }
-.drop-enter, .drop-leave-active {
-  opacity: 0
+.bounce-leave-active {
+  animation: bounce-out .5s;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bounce-out {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(0);
+  }
 }
 body{
   margin: 0;
@@ -97,8 +110,10 @@ a{
   padding: 0;
 }
 .content{
+  position: relative;
   width: 800px;
   margin: 30px auto;
+  min-height: 455px;
 }
 .nav{
   height: 80px;
@@ -158,10 +173,7 @@ a:focus, a:hover {
   bottom: 0;
   left: 0;
 }
-.active{
-  height: 95px;
-}
-/*媒体查询 响应式*/
+
 @media screen and (max-width: 900px) {
   .search{
     display: none;
@@ -181,19 +193,18 @@ a:focus, a:hover {
   .menu{
     display: block;
   }
-  .drop-nav{
-    padding-top: 10px;
-    border-top: 1px solid #ddd;
-    text-align: center;
-    font-size: 16px;
-    background-color: #eee;
-  }
   .drop-nav a{
-    margin: 0 10px;
+    font-size: 13px;
+    text-align: center;
+    width: 19%;
+    display: inline-block;
   }
-  .logo,.container{
-    height: 50px;
-    line-height: 70px;
+  .content{
+    margin: 40px auto;
   }
+  .drop-nav{
+    padding: 12px 0;
+  }
+
 }
 </style>
