@@ -33,6 +33,15 @@ BlogSchema.statics = {
 	},
 	deleteTagInBlog: function (tagId) {
 		return this.update({tags: tagId}, {$pull: {tags: tagId}}, {multi: 1});
+	},
+	getBlogArchives: function() {
+		return this.aggregate([
+				{"$project": {"year": {"$year": "$create_at"}, "blog":{"_id":"$_id","create_at": "$create_at", "title": "$title"}}},
+				{"$sort": {"blog.create_at": -1}},
+				{"$group": {"_id": {"year": "$year"}, "blogs": {"$push": "$blog"}}},
+				{"$project": {"_id": 0, "year": "$_id.year", "blogs": 1, "count": {"$size": "$blogs"}}},
+				{"$sort":{"year": -1}}
+			]).exec();
 	}
 };
 

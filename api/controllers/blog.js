@@ -20,12 +20,6 @@ blogController.getOneBlog = (req, res, next) => {
 
 blogController.addOneBlog = (req, res, next) => {
 	const body = req.body;
-	// const data = easyCopy(body, ['title', 'content', 'category', 'tags']);
-	// Object.getOwnPropertyNames(data).forEach(key => {
-	// 	if(!data[key]){
-	// 		throw new HttpError.BadRequestError('缺少信息' + key);
-	// 	}
-	// });	
 	const _blog = Object.assign(new Blog(), body);
 	Blog.updateBlog(_blog).then(blog => {
 		res.success(blog, 201);
@@ -35,12 +29,6 @@ blogController.addOneBlog = (req, res, next) => {
 blogController.updateOneBlog = (req, res, next) => {
 	const blogId = req.params.blogId;
 	const body = req.body;
-	// const data = easyCopy(body, ['title', 'content', 'category', 'tags']);
-	// Object.getOwnPropertyNames(data).forEach(key => {
-	// 	if(!data[key]){
-	// 		throw new HttpError.BadRequestError('缺少信息' + key);
-	// 	}
-	// });	
 	Blog.findBlogById(blogId).then(blog => {
 		Object.assign(blog, body);
 		return Blog.updateBlog(blog);
@@ -56,4 +44,9 @@ blogController.removeOneBlog = (req, res, next) => {
 	}).catch(next);
 };
 
+blogController.getArchives = (req, res, next) => {
+	Blog.getBlogArchives().then(blogs => {
+		res.success(blogs);
+	}).catch(next);
+}
 module.exports = blogController;

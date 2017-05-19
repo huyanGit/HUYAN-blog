@@ -38,6 +38,10 @@ router.route('/tag/:tagId')
 	.delete(adminRequired, tagController.deleteOneTag)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
+router.route('/archive')
+	.get(blogController.getArchives)
+	.all(() => {throw new HttpError.MethodNotAllowedError()});
+
 router.route('/admin/authorization')
 	.post(adminController.authorize)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});

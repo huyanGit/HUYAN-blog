@@ -50,8 +50,9 @@ export default {
 }
 .blog-number{
 	font-size: 16px;
-   margin-left: 10px;
-   color: #999;
+  font-weight: 200; 
+  margin-left: 10px;
+  color: #999;
 }
 .blog{
 	font-size: 14px;
