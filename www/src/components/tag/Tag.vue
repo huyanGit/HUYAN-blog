@@ -2,7 +2,7 @@
   <div class="tag">
     <div class="tag_num">共有{{tags.length}}个标签：</div>
     <ul>
-    	<li :style="{fontSize: tag.count + 15 + 'px'}" v-for="tag in tags"><router-link to="#">{{tag.tag_name}}</router-link></li>
+    	<li :style="{fontSize: tag.count*2 + 15 + 'px'}" v-for="tag in tags"><router-link :to="'/tag/' + tag._id">{{tag.tag_name}}</router-link></li>
     </ul>
   </div>
 </template>
@@ -29,7 +29,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .tag_num {
 	font-size: 18px;

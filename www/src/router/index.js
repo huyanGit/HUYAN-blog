@@ -8,6 +8,8 @@ import About from '../components/about/About'
 import Notfound from '../components/Notfound'
 import Detail from '../components/blog/Detail'
 import CategoryWithBlogs from '../components/category/CategoryWithBlogs'
+import TagWithBlogs from '../components/tag/TagWithBlogs'
+
 Vue.use(Router);
 
 const routes = [
@@ -30,6 +32,10 @@ const routes = [
 	{
 		path: '/tag',
 		component: Tag
+	},
+	{
+		path: '/tag/:tagId',
+		component: TagWithBlogs
 	},
 	{
 		path: '/archive',

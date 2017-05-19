@@ -41,7 +41,7 @@ export default{
 				vm.category = res.data;
 			});
 		},
-		getBlogs: function(category){
+		getBlogs: function(){
 			var vm = this;
 			return blogResource.getBlogs().then(function(res){
 				vm.blogs = res.data;

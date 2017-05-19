@@ -1,7 +1,7 @@
 <template>
   <div class="category">
     <div v-for="item in categories">
-    	<div>
+    	<div class="category-title">
     		<router-link :to="'/category/' + item._id" class="category-name">{{item.category_name}}</router-link>
     		<span class="blog-number">(共有{{item.count}}篇文章)</span>
     	</div>
@@ -65,5 +65,8 @@ export default {
   margin-right:15px;
   font-size: 14px;
   color: #555;
+}
+.category-title a:hover{
+  color: #1D8CE0;
 }
 </style>

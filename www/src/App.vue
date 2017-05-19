@@ -194,7 +194,7 @@ a:focus, a:hover {
     display: block;
   }
   .drop-nav a{
-    font-size: 15px;
+    font-size: 16px;
     text-align: center;
     width: 19%;
     display: inline-block;
