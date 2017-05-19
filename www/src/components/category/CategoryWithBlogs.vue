@@ -1,24 +1,29 @@
 <template>
 	<div>
 		<div class="category-head">{{category.category_name}}</div>
-		<div class="category-content" v-for="blog in blogs">
-			<div class="category-blog">
+		<div class="category-blog" v-for="blog in blogs">
+			<div v-if="blog.category.category_name == category.category_name" class="blog-list">			
 				<div class="blog-head">
-					<h2>{{blog.title}}</h2>
-					<div class="blog-data">
-						<span class="b_span"><span class="glyphicon glyphicon-book"></span><span class="icon">{{blog.category.category_name}}</span></span>
-			    	<span class="b_span"><span class="glyphicon glyphicon-calendar"></span><span class="icon">{{blog.create_at | timeFilter}}</span></span>
-			    	<span class="b_span"><span class="glyphicon glyphicon-tag"></span><span v-for="tag in blog.tags" class="icon">{{tag.tag_name}}</span></span>
+					<router-link :to="'/blog/' + blog._id" class="blog-title">{{blog.title}}</router-link :to="'/blog/' + blog._id">
+					<div class="b_data">
+						<span><span class="glyphicon glyphicon-book"></span><span class="icon">{{blog.category.category_name}}</span></span>
+			    	<span><span class="glyphicon glyphicon-calendar"></span><span class="icon">{{blog.create_at | timeFilter}}</span></span>
+			    	<span><span class="glyphicon glyphicon-tag"></span><span v-for="tag in blog.tags" class="icon">{{tag.tag_name}}</span></span>
 					</div>
 				</div>
-				<div class="blog-content"></div>
-			</div>
+				<div class="blog-content">
+					<p>{{blog.content | blogLengthFilter(150)}}</p>
+				</div>
+				<div class="blog-findall">
+		    	<router-link :to="'/blog/' + blog._id">查看原文</router-link>
+		    </div>
+	    </div>		
 		</div>
 	</div>
 </template>
 
 <script>
-import {timeFilter} from '../../utils/filters'
+import {timeFilter,blogLengthFilter} from '../../utils/filters'
 import categoryResource from '../../axios/category'
 import blogResource from '../../axios/blog'
 export default{
@@ -36,9 +41,9 @@ export default{
 				vm.category = res.data;
 			});
 		},
-		getBlogsByCategory: function(category){
+		getBlogs: function(category){
 			var vm = this;
-			return blogResource.getBlogsByCategory(category).then(function(res){
+			return blogResource.getBlogs().then(function(res){
 				vm.blogs = res.data;
 			});
 		}
@@ -53,8 +58,10 @@ export default{
 	},
 	created(){
 		return this.getCategoryById();
+	},
+	beforeMount(){
+		return this.getBlogs();
 	}
-	
 }
 </script>
 
@@ -63,5 +70,8 @@ export default{
   font-size: 28px;
   font-weight: 600;
   color:#555;
-}	
+}
+.blog-list{
+	margin: 15px auto;
+}
 </style>

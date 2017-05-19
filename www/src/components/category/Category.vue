@@ -2,7 +2,7 @@
   <div class="category">
     <div v-for="item in categories">
     	<div>
-    		<span class="category-name">{{item.category_name}}</span>
+    		<router-link :to="'/category/' + item._id" class="category-name">{{item.category_name}}</router-link>
     		<span class="blog-number">(共有{{item.count}}篇文章)</span>
     	</div>
     	<div class="blog-list">

@@ -53,13 +53,13 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .blog-list{
 	width: inherit;
 	margin: 30px auto;
 }
 .blog-head{
-	 color: #888;
+	color: #888;
 }
 .blog-title{
 	font-size: 24px;
@@ -77,5 +77,12 @@ export default {
 .icon{
 	padding: 0 8px;
 	margin: 0;
+}
+.blog-findall a{
+	font-size: 15px;
+	border-bottom: 1px dashed #666;
+}
+.blog-content p{
+	margin-bottom: 5px;
 }
 </style>

@@ -186,7 +186,7 @@ a:focus, a:hover {
     justify-content: space-between;
   }
 }
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
   .nav-link{
     display: none;
   }
@@ -194,7 +194,7 @@ a:focus, a:hover {
     display: block;
   }
   .drop-nav a{
-    font-size: 13px;
+    font-size: 15px;
     text-align: center;
     width: 19%;
     display: inline-block;
