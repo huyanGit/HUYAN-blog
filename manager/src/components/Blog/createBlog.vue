@@ -5,20 +5,22 @@
     <el-input v-model="newblog.title"></el-input>
   </el-form-item>
   <el-form-item label="文章分类">
-    <el-select v-model="newblog.category_name" placeholder="请选择">
+    <el-select v-model="newblog.category" placeholder="请选择">
       <el-option
       v-for="category in catagories"
-      :key="category.category_name"
-      :value="category.category_name">
+      :key="category._id"
+      :label="category.category_name"
+      :value="category._id">
       </el-option>
     </el-select>
   </el-form-item>
   <el-form-item label="文章标签">
-     <el-select v-model="newblog.tag_name" placeholder="请选择">
+     <el-select v-model="newblog.tags" multiple placeholder="请选择">
       <el-option
       v-for="tag in tags"
-      :key="tag.tag_name"
-      :value="tag.tag_name">
+      :key="tag._id"
+      :label="tag.tag_name"
+      :value="tag._id">
       </el-option>
     </el-select>   
   </el-form-item>
@@ -37,23 +39,50 @@
 </div>	
 </template>
 <script>
+import tagResource from '../../axios/tag'
+import categoryResource from '../../axios/category'
+import blogResource from '../../axios/blog'
 export default {
   data() {
     return {
       newblog: {
         title:'',
         content:'',        
-        category_name : '',
-        tag_name:''
+        category:'',
+        tags:[]
       },
-      tags:[{tag_name:'2'}],
-      catagories: [{category_name:'1'}]
+      tags:[],
+      catagories:[]
     };
   },
   methods: {
     submit: function(){
-      console.log(this.newblog);
+      return this.createOneBlog(this.newblog);
+    },
+    getTags: function(){
+      var vm = this;
+      return tagResource.getTags().then(function(res){
+        vm.tags = res.data;
+      });
+    },
+    getCategories: function(){
+      var vm = this;
+      return categoryResource.getCategories().then(function(res){
+        vm.catagories = res.data;
+      })
+    },
+    createOneBlog: function(data){
+      return blogResource.createOneBlog(data).then(function(res){
+        console.log(res.data);
+      });
+    },
+    getTagsAndCategories:function(){
+      this.getTags();
+      this.getCategories();
     }
+  },
+  created(){
+    return this.getTagsAndCategories();
   }
 }	
 </script>
