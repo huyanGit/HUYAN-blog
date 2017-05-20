@@ -22,7 +22,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .content{
   display: flex;
   width: 100%;
@@ -40,7 +40,7 @@ export default {
     padding: 50px 70px; 
   }
 .el-menu{
-    background-color: transparent!important;
+    background-color: transparent;
   }
 .main-right{
   width: 100%;

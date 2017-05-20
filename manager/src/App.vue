@@ -3,7 +3,7 @@
     <header class="header header-fixed">
       <el-row>
           <el-col :span="24">
-            <el-menu default-active="/blog" class="el-menu-demo" mode="horizontal" router="true">
+            <el-menu id="nav" default-active="/blog" class="el-menu-demo" mode="horizontal" router="true">
               <el-menu-item index="/blog/create">博客</el-menu-item>
               <el-menu-item index="/tag/create">标签</el-menu-item>
               <el-menu-item index="/category/create">分类</el-menu-item>
@@ -57,6 +57,9 @@ header.header-fixed {
   top: 0;
   left: 0;
   right: 0;
+}
+#nav{
+  background-color: #eef1f6;
 }
 /* 主内容区 */
   main{     

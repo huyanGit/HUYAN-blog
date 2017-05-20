@@ -27,27 +27,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.content{
-  display: flex;
-  width: 100%;
-}
-.main-left{
-    text-align: center;
-    width: 200px;
-    float: left;
-  }
-.main-right{
-    -webkit-box-flex: 1;  
-    -ms-flex: 1;  
-    flex: 1;  
-    background-color: #fff; 
-    padding: 50px 70px; 
-  }
-.el-menu{
-    background-color: transparent!important;
-  }
-.main-right{
-  width: 100%;
-}
-</style>
