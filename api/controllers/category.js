@@ -1,5 +1,4 @@
 const Category = require('../models').Category;
-//const mongoose = require('mongoose');
 const categoryControllers = {};
 
 //add category

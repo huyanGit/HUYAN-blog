@@ -1,6 +1,5 @@
 const Blog = require('../models').Blog;
 const HttpError = require('some-http-error');
-const easyCopy = require('easy-copy');
 const blogController = {};
 
 blogController.getBlogs = (req, res, next) => {
