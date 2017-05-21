@@ -1,11 +1,11 @@
 <template>
 <div>
-  <el-form label-position="left" label-width="80px" :model="newtag" :inline="true">
-  <el-form-item label="添加标签" required>
+  <el-form label-position="left" label-width="80px" :model="newtag" :inline="true" ref="newtag" :rules="rules">
+  <el-form-item label="添加标签" prop="tag_name" required>
     <el-input v-model="newtag.tag_name" placeholder="标签"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitTag()">创建</el-button>
+    <el-button type="primary" @click="submitTag('newtag')">创建</el-button>
   </el-form-item>
 </el-form>
 </div>  
@@ -17,33 +17,38 @@ export default {
     return {
       newtag: {
         tag_name: ''
+      },
+      rules: {
+        tag_name:[{required: true, message:'请输入标签名', trigger:'blur'}]
       }
     };
   },
   methods:{
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
     createOneTag(){
       var vm = this;
       return tagResource.createOneTag(vm.newtag).then(function(res) {
         console.log(res.data);
       })
     },
-    submitTag(){
-      this.$confirm('确定创建标签类吗, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
+    submitTag(formName){
+      var vm = this;
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
           this.createOneTag(this.newtag);
           this.$message({
-            type: 'success',
-            message: '创建成功!'
+            message: '添加成功！',
+            type: 'success'
           });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消创建'
-          });          
-        }); 
+          setTimeout(function(){
+            vm.resetForm(formName);
+          },200);      
+        } else {
+          return false;
+        }
+      });
     }
   }
 } 

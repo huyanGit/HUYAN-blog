@@ -26,7 +26,7 @@
     </el-table-column>
     <el-table-column label="操作">
       <template scope="scope">
-        <router-link to="/blog/create">修改</router-link>
+        <el-button size="small">修改</el-button>
         <el-button
           size="small"
           type="danger"

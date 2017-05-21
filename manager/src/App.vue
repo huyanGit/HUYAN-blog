@@ -1,71 +1,70 @@
+
+
 <template>
-  <div id="app">
-    <header class="header header-fixed">
-      <el-row>
-          <el-col :span="24">
-            <el-menu id="nav" default-active="/blog" class="el-menu-demo" mode="horizontal" :router="true">
-              <el-menu-item index="/blog/create">博客</el-menu-item>
-              <el-menu-item index="/tag/create">标签</el-menu-item>
-              <el-menu-item index="/category/create">分类</el-menu-item>
-            </el-menu>
-          </el-col>
-      </el-row>
-    </header>
-    <div style="position: relative;height: 60px;width: 100%;"></div>
-    <main> 
-        <router-view></router-view>
+  <div class="app">
+    <nav>
+      <el-menu theme="dark" :router="true">
+        <div class="title">博客管理系统</div>
+        <el-submenu index="1">
+          <template slot="title"><i class="el-icon-document"></i>博客</template>
+          <el-menu-item-group>
+            <el-menu-item index="/blog/create">发布文章</el-menu-item>
+            <el-menu-item index="/blog/manage">管理文章</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="2">
+          <template slot="title"><i class="el-icon-menu"></i>分类</template>
+          <el-menu-item-group>
+            <el-menu-item index="/category/create">添加分类</el-menu-item>
+            <el-menu-item index="/category/manage">管理分类</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="3">
+          <template slot="title"><i class="el-icon-star-on"></i>标签</template>
+          <el-menu-item-group>
+            <el-menu-item index="/tag/create">添加标签</el-menu-item>
+            <el-menu-item index="/tag/manage">管理标签</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>        
+      </el-menu>
+    </nav>
+    <main>
+      <router-view></router-view>
     </main>
   </div>
 </template>
-
 <script>
 import Vue from 'vue'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(Element)
-
 export default {
-  name: 'app',
-  data: function (){
-    return {
-      active:true
-    }
-  }
 }
 </script>
-
 <style>
-body{margin: 0;}
-#app {
-min-width: 1200px;
-margin: 0 auto;
-font-family: "Helvetica Neue","PingFang SC",Arial,sans-serif;
+html body{
+  margin: 0;
+  padding: 0;
 }
-/* 头部导航 */
-header{
-  z-index: 1000;
-  border-top: solid 4px #3091F2;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04); 
-   }
-
-header .el-menu-demo{
-  padding-left: 300px;
+nav{
+  width: 200px;
+  height: 569px;
+  background-color: #324157;
 }
-header.header-fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+.app{
+  display: flex;
+  align-items: flex-start;
 }
-#nav{
-  background-color: #eef1f6;
+main{
+  flex-grow: 1;
+  padding: 30px 50px;
 }
-/* 主内容区 */
-  main{     
-    display: flex; 
-    min-height: 800px;  
-    background-color: #FCFCFC;
-    border: 40px solid #e9ecf1;  
-  }
+.title{
+  color: #bfcbd9;
+  font-size: 22px;
+  height: 56px;
+  line-height: 56px;
+  margin-left: 18px;
+}
 </style>
