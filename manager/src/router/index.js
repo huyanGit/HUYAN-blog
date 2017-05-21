@@ -7,35 +7,20 @@ import manageTag from '../components/Tag/manageTag'
 import createCategory from '../components/Category/createCategory'
 import manageCategory from '../components/Category/manageCategory'
 import Login from '../components/Login'
+import NavMenu from '../components/NavMenu'
 Vue.use(Router);
 const routes = [
-	{
-		path: '/',
-		component: Login,
-	},
-	{
-		path: '/blog/create',
-		component: createBlog
-	},
-	{
-		path: '/blog/manage',
-		component: manageBlog
-	},
-	{
-		path: '/category/create',
-		component: createCategory
-	},
-	{
-		path: '/category/manage',
-		component: manageCategory
-	},
-	{
-		path: '/tag/create',
-		component: createTag
-	},
-	{
-		path: '/tag/manage',
-		component: manageTag
+	{path: '/', redirect: '/login'},
+	{path: '/login', component: Login},
+	{path: '/admin', component: NavMenu,
+		children:[
+			{path: '/blog/create', component: createBlog},
+			{path: '/blog/manage', component: manageBlog},
+			{path: '/tag/create', component: createTag},
+			{path: '/tag/manage', component: manageTag},
+			{path: '/category/create', component: createCategory},
+			{path: '/category/manage', component: manageCategory}
+		]
 	}
 ];
 export default new Router({
