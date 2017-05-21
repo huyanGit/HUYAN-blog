@@ -28,7 +28,8 @@ CategorySchema.statics = {
 	getCategoryWithBlogCount: function(){
 		return this.aggregate([
 			{"$lookup": {"from": "blogs", "localField": "_id", "foreignField": "category", "as": "blogs"}},
-			{"$project": {"category_name":1, "blogs": 1, "count": {"$size": "$blogs"}}}
+			{"$project": {"create_at": 1,"category_name":1, "blogs": 1, "count": {"$size": "$blogs"}}},
+			{"$sort": {"create_at": -1}}
 			]).exec();
 	}
 };

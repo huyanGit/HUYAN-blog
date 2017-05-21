@@ -28,7 +28,8 @@ TagSchema.statics = {
 	getTagsWithBlogCount: function(){
 		return this.aggregate([
 				{"$lookup":{"from": "blogs", "localField": "_id", "foreignField":"tags", "as": "blogs"}},
-				{"$project":{"tag_name":1,"count":{"$size": "$blogs"}}}
+				{"$project":{"tag_name":1,"count":{"$size": "$blogs"}, "create_at": 1, "blogs": 1}},
+				{"$sort": {"create_at": -1}}
 			]).exec();
 	}
 };
