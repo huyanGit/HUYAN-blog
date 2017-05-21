@@ -6,6 +6,9 @@ var tagResource = {
 	},
 	createOneTag: function(data){
 		return instance.post('/tag', data);
+	},
+	deleteOneTag: function(tagId){
+		return instance.delete('/tag/' + tagId);
 	}
 }
 export default tagResource;
