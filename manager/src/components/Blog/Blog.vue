@@ -6,7 +6,7 @@
           <el-menu-item index="/blog/manage" :class="{'isActive': !active}">博客管理</el-menu-item>
         </el-menu>
       </div>
-      <div  class="main-right" >
+      <div  class="main-right">
         <router-view></router-view>
       </div>
   </div>

@@ -1,5 +1,4 @@
 <template>
-
 	<el-form label-position="top" label-width="80px" :model="newblog" ref="newblog" :rules="rules">
     <el-form-item label="文章标题" prop="title" required>
       <el-input v-model="newblog.title"></el-input>
@@ -36,8 +35,7 @@
       <el-button type="primary" @click="submitForm('newblog')">发布文章</el-button>
       <el-button @click="resetForm('newblog')">重置</el-button>
     </el-form-item>   
-  </el-form>
-	
+  </el-form>	
 </template>
 <script>
 import tagResource from '../../axios/tag'
@@ -75,14 +73,13 @@ export default {
             message: '发布成功！',
             type: 'success'
           });
+          setTimeout(function(){
+            vm.resetForm(formName);
+          },200);      
         } else {
           return false;
         }
       });
-      var vm = this;
-      setTimeout(function(){
-        vm.resetForm(formName);
-      },200);      
     },
     getTags: function(){
       var vm = this;

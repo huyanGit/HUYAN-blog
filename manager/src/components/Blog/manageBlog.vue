@@ -26,9 +26,7 @@
     </el-table-column>
     <el-table-column label="操作">
       <template scope="scope">
-        <el-button
-          size="small"
-          @click="updateBlog(scope.row)">修改</el-button>
+        <router-link to="/blog/create">修改</router-link>
         <el-button
           size="small"
           type="danger"
@@ -48,16 +46,13 @@ export default {
     }
   },
   methods: {
-    updateBlog(row) {
-      
-    },
-    deleteBlog(row) {
+    deleteBlog(blog) {
       this.$confirm('此操作将永久删除该篇博客, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          blogResource.deleteOneBlog(row._id);
+          blogResource.deleteOneBlog(blog._id);
           this.$message({
             type: 'success',
             message: '删除成功!'
@@ -89,3 +84,19 @@ export default {
   }
 }
 </script>
+<style scoped>
+a{
+  text-decoration: none;
+  color: #1f2d3d;
+  border: 1px solid #bfcbd9;
+  border-radius: 4px;
+  padding: 5.5px 9px;
+  font-size: 12px;
+  margin-right: 8px;
+}
+a:hover{
+  color: #20a0ff;
+  border-color: #20a0ff;
+}
+
+</style>
