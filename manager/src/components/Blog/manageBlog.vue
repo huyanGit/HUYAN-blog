@@ -84,7 +84,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
 a{
   text-decoration: none;
   color: #1f2d3d;

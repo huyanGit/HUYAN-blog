@@ -48,7 +48,7 @@ export default {
       var vm = this;
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.createOneTag(this.newtag);
+          this.createOneTag();
           this.$message({
             message: '添加成功！',
             type: 'success'
