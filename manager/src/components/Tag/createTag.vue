@@ -29,9 +29,20 @@ export default {
     },
     createOneTag(){
       var vm = this;
-      return tagResource.createOneTag(vm.newtag).then(function(res) {
-        console.log(res.data);
-      })
+      tagResource.getTags().then(function(res){
+        for(let i = 0; i < res.data.length; i++){
+          if(res.data[i].tag_name == vm.newtag.tag_name){
+            vm.$message({
+              message: '该标签已存在！',
+              type: 'info'
+            });
+            return false;
+          }
+        }
+        tagResource.createOneTag(vm.newtag).then(function(res) {
+          console.log(res.data);
+        });  
+      });
     },
     submitTag(formName){
       var vm = this;

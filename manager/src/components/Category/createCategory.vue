@@ -29,9 +29,20 @@ export default {
     },    
     createOneCategory(){
       var vm = this;
-      return categoryResource.createOneCategory(vm.newcategory).then(function(res) {
-        console.log(res.data);
-      })
+      categoryResource.getCategories().then(function(res){
+        for(let i = 0; i < res.data.length; i++){
+          if(res.data[i].category_name == vm.newcategory.category_name){
+            vm.$message({
+              message: '该分类已存在！',
+              type: 'info'
+            });
+            return false;
+          }
+        }
+        categoryResource.createOneCategory(vm.newcategory).then(function(res) {
+          console.log(res.data);
+        })
+      });
     },
     submitCategory(formName){
       var vm = this;
