@@ -25,9 +25,7 @@
     </el-table-column>
     <el-table-column label="操作">
       <template scope="scope">
-        <el-button
-          size="small"
-          @click="updateTag(scope.row)">修改</el-button>
+        <router-link :to="{path: '/tag/create', query:{id: scope.row._id}}">修改</router-link>
         <el-button
           size="small"
           type="danger"

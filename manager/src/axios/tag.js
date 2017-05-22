@@ -9,6 +9,12 @@ var tagResource = {
 	},
 	deleteOneTag: function(tagId){
 		return instance.delete('/tag/' + tagId);
+	},
+	getOneTag: function(tagId){
+		return instance.get('/tag/' + tagId);
+	},
+	updateOneTag: function(tagId, data){
+		return instance.put('/tag/' + tagId, data);
 	}
 }
 export default tagResource;
