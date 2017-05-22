@@ -26,7 +26,7 @@
     </el-table-column>
     <el-table-column label="操作">
       <template scope="scope">
-        <el-button size="small">修改</el-button>
+        <router-link :to="{path: '/blog/create', query:{id: scope.row._id}}">修改</router-link>
         <el-button
           size="small"
           type="danger"
@@ -90,7 +90,7 @@ a{
   color: #1f2d3d;
   border: 1px solid #bfcbd9;
   border-radius: 4px;
-  padding: 5.5px 9px;
+  padding: 4.5px 9px;
   font-size: 12px;
   margin-right: 8px;
 }

@@ -9,6 +9,12 @@ var blogResource = {
 	},
 	deleteOneBlog: function (blogId) {
 		return instance.delete('/blog/' + blogId);
+	},
+	getOneBlog: function (blogId) {
+		return instance.get('/blog/' + blogId);
+	},
+	updateOneBlog: function(blogId, data) {
+		return instance.put('/blog/' + blogId, data);
 	}
 }
 

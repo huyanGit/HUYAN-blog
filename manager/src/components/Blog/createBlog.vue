@@ -6,7 +6,7 @@
     <el-form-item label="文章分类" prop="category" required>
       <el-select v-model="newblog.category" placeholder="请选择">
         <el-option
-        v-for="category in catagories"
+        v-for="category in categories"
         :key="category._id"
         :label="category.category_name"
         :value="category._id">
@@ -32,10 +32,11 @@
       </el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm('newblog')">发布文章</el-button>
+      <el-button type="primary" @click="submitForm('newblog')">{{submit}}</el-button>
       <el-button @click="resetForm('newblog')">重置</el-button>
     </el-form-item>   
-  </el-form>	
+  </el-form>
+
 </template>
 <script>
 import tagResource from '../../axios/tag'
@@ -50,8 +51,10 @@ export default {
         category:'',
         tags:[]
       },
+      blog_update_id:'',
+      submit:'',
       tags:[],
-      catagories:[],
+      categories:[],
       rules:{
         title:[{required: true, message:'请输入文章标题', trigger:'blur'}],
         category:[{required: true, message:'请选择文章分类', trigger:'change'}],
@@ -66,45 +69,85 @@ export default {
     },
     submitForm: function(formName){
       var vm = this;
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.createOneBlog(this.newblog);
-          this.$message({
-            message: '发布成功！',
-            type: 'success'
-          });
-          setTimeout(function(){
-            vm.resetForm(formName);
-          },200);      
-        } else {
-          return false;
-        }
-      });
-    },
-    getTags: function(){
-      var vm = this;
-      return tagResource.getTags().then(function(res){
-        vm.tags = res.data;
-      });
-    },
-    getCategories: function(){
-      var vm = this;
-      return categoryResource.getCategories().then(function(res){
-        vm.catagories = res.data;
-      })
+      if(vm.blog_update_id == ''){
+        vm.$refs[formName].validate((valid) => {
+          if (valid) {
+            console.log(vm.newblog);
+            vm.createOneBlog(vm.newblog);
+            vm.$message({
+              message: '发布成功！',
+              type: 'success'
+            });
+            setTimeout(function(){
+              vm.resetForm(formName);
+            },200);      
+          } else {
+            return false;
+          }
+        });
+      }else{
+        vm.$refs[formName].validate((valid) => {
+          if(valid) {
+            vm.updateOneBlog(vm.blog_update_id, vm.newblog);
+            vm.$message({
+              message: '修改成功！',
+              type: 'success'
+            });
+            setTimeout(function(){
+              vm.resetForm(formName);
+            },200);
+          }else{
+            return false;
+          }
+        });
+      }
     },
     createOneBlog: function(data){
       return blogResource.createOneBlog(data).then(function(res){
         console.log(res.data);
+      }).catch(function(err){
+        alert(err);
+      });
+    },
+    updateOneBlog: function(blogId, data){
+      return blogResource.updateOneBlog(blogId, data).then(function(res){
+        console.log(res.data);
+      }).catch(function(err){
+        alert(err);
       });
     },
     getTagsAndCategories:function(){
-      this.getTags();
-      this.getCategories();
+      var vm = this;
+      categoryResource.getCategories().then(function(res){
+        vm.categories = res.data;
+      });
+      tagResource.getTags().then(function(res){
+        vm.tags = res.data;
+      })
+    },
+    getBlog_update: function(){
+      var vm = this;
+      blogResource.getOneBlog(vm.blog_update_id).then(function(res){
+        let blog = vm.newblog, data = res.data;
+        blog.title = data.title;
+        blog.content = data.content;
+        blog.category = data.category._id;
+        for(let i = 0; i < data.tags.length; i++){
+          blog.tags.push(data.tags[i]._id);
+        }
+      });
     }
 
   },
   created(){
+    this.submit = "发布博客";
+    this.blog_update_id = window.location.search.split('=')[1];
+    if(this.blog_update_id){
+      this.submit = "修改博客";
+      this.getBlog_update();
+    } else{
+      this.blog_update_id = '';
+    }
     return this.getTagsAndCategories();
   }
 }	
