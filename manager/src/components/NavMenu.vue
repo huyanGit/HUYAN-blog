@@ -1,6 +1,6 @@
 <template>
   <div class="manage">
-    <nav>
+    <nav :style="{height: innerheight + 'px'}">
       <el-menu theme="dark" :router="true">
         <div class="title">博客管理系统</div>
         <el-submenu index="1">
@@ -33,6 +33,11 @@
 </template>
 <script>
 export default {
+  data(){
+    return{
+      innerheight: window.innerHeight
+    }
+  }
 }
 </script>
 <style>
@@ -41,8 +46,7 @@ html body{
   padding: 0;
 }
 nav{
-  width: 200px;
-  height: 569px;
+  width: 250px;
   background-color: #324157;
 }
 .manage{
