@@ -205,6 +205,62 @@ a:focus, a:hover {
   .drop-nav{
     padding: 12px 0;
   }
-
+  /*首页*/
+  .content .blog-title{
+    font-size: 17px;
+  }
+  .content .blog-content{
+    font-size: 13px;
+  }
+  /*详情*/
+  #app .content .detail{
+    font-size: 21px;
+  }
+  #app .content p{
+    font-size: 13px;
+  }
+  /*分类*/
+  #app .content .category-name{
+    font-size: 17px;
+  }
+  #app .content .blog-number{
+    font-size: 13px;
+  }
+  #app .category{
+    padding-top: 15px
+  }
+  /*归档*/
+  #app .content .blog-archive{
+    text-align: center;
+    padding-top: 15px;
+  }
+  #app .content ul{
+    padding: 0;
+  }
+  #app .content ul a{
+    font-size: 14px;
+    color: #1D8CE0;
+  }
+  /*标签*/
+  #app .content .tag{
+    padding-top: 15px;
+  }
+  #app .content .tag ul{
+    text-align: center;
+    padding-top: 10px;
+  }
+  /*关于*/
+  #app .content .about p{
+    font-size: 13px;
+  }
+  #app .content .about {
+    padding-top: 2px;
+  }
+  #app .content .about h2{
+    font-size: 21px;
+  }
+  #app .content .about ul li a{
+    font-size: 13px;
+  }
 }
 </style>

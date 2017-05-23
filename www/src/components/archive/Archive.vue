@@ -43,7 +43,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .blog-archive{
-	width: 800px;
+	width: inherit;
 	margin: 30px auto; 
 }
 .year{
