@@ -56,7 +56,7 @@ export default {
 <style>
 .blog-list{
 	width: inherit;
-	margin: 30px auto;
+	margin: 10px auto;
 }
 .blog-head{
 	color: #888;

@@ -32,7 +32,7 @@
         </div>
       </transition>  
     </nav>
-    <div class="content">
+    <div class="content" :style="{minHeight: contentHeight + 'px'}">
       <router-view></router-view>
     </div>
     <footer class="footer">
@@ -46,7 +46,8 @@ export default {
   data (){
     return {
       showDropNav: false,
-      year: new Date().getUTCFullYear()
+      year: new Date().getUTCFullYear(),
+      contentHeight: window.innerHeight - 160
     }
   },
   methods: {
@@ -112,13 +113,14 @@ a{
 .content{
   position: relative;
   width: 800px;
-  margin: 30px auto;
-  min-height: 455px;
+  margin: 0 auto;
+  padding: 30px 0;
 }
 .nav{
   height: 80px;
   width: 100%;
   background-color: #eee;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);
 }
 .nav-link ul li{
   list-style: none;
@@ -172,6 +174,7 @@ a:focus, a:hover {
   position: relative;
   bottom: 0;
   left: 0;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);
 }
 
 @media screen and (max-width: 900px) {
@@ -180,7 +183,8 @@ a:focus, a:hover {
   }
   .content{
     width: 90%;
-    margin: 30px auto;
+    margin: 0 auto;
+    padding: 30px 0;
   }
   .container{
     justify-content: space-between;
@@ -194,16 +198,20 @@ a:focus, a:hover {
     display: block;
   }
   .drop-nav a{
-    font-size: 16px;
+    font-size: 17px;
     text-align: center;
     width: 19%;
     display: inline-block;
   }
   .content{
     margin: 40px auto;
+    padding: 0;
   }
   .drop-nav{
     padding: 12px 0;
+  }
+  #app .content .blog-findall a{
+    font-size: 13px;
   }
   /*首页*/
   .content .blog-title{
@@ -230,7 +238,7 @@ a:focus, a:hover {
     padding-top: 15px
   }
   /*归档*/
-  #app .content .blog-archive{
+  #app .content .blog-archive .year{
     text-align: center;
     padding-top: 15px;
   }

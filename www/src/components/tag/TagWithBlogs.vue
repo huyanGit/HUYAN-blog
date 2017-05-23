@@ -73,4 +73,7 @@ export default{
   font-weight: 600;
   color:#555;	
 }
+.blog-list{
+	margin: 15px auto;
+}
 </style>
