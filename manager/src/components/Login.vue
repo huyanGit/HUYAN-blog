@@ -15,7 +15,8 @@
   </div>
 </template>
 <script>
-import authorization from '../axios/authorization'
+import axios from 'axios'
+import configs from '../configs'
 export default {
   data() {
     return{
@@ -34,7 +35,8 @@ export default {
       var vm = this;
       vm.$refs[formName].validate((valid) => {
         if (valid) {
-          authorization(vm.loginDate).then(function(res){
+          axios.post(configs.baseURL + '/admin/authorization', vm.loginDate).then(function(res){
+            console.log(res.data);
             window.sessionStorage.setItem('token', res.data.token);
             window.location.href = '/admin';
           });

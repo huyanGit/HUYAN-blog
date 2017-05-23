@@ -39,6 +39,7 @@
 <script>
 import blogResource from '../../axios/blog'
 import timeFilter from '../../utils/filters'
+import removeByValue from '../../utils/tool'
 export default {
   data() {
     return {
@@ -52,7 +53,11 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          blogResource.deleteOneBlog(blog._id);
+          blogResource.deleteOneBlog(blog._id).then(function(){
+            console.log('remove blog :' + blog.title);
+          });
+          //update data
+          removeByValue(this.blogs, blog);
           this.$message({
             type: 'success',
             message: '删除成功!'
@@ -77,9 +82,6 @@ export default {
     }
   },
   mounted(){
-    return this.getBlogs();
-  },
-  updated(){
     return this.getBlogs();
   }
 }

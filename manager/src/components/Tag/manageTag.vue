@@ -39,6 +39,7 @@
 import tagResource from '../../axios/tag'
 import blogResource from '../../axios/blog'
 import timeFilter from '../../utils/filters'
+import removeByValue from '../../utils/tool'
 export default {
   data() {
     return {
@@ -56,12 +57,14 @@ export default {
         type: 'warning'
       }).then(() => {
         for(let i = 0; i < tag.blogs.length; i++){
-          console.log(tag.blogs[i]._id);
+          console.log('remove blog in ' + tag.tag_name + ': ' + tag.blogs[i].title);
           blogResource.deleteOneBlog(tag.blogs[i]._id);
         }
         tagResource.deleteOneTag(tag._id).then(function(){
-          console.log('remove success');
+          console.log('remove tag: ' + tag.tag_name);
         });
+        //update data
+        removeByValue(this.tags, tag);
         this.$message({
           type: 'success',
           message: '删除成功!'
@@ -86,9 +89,6 @@ export default {
     }
   },
   created(){
-    return this.getTags();
-  },
-  updated(){
     return this.getTags();
   }
 }

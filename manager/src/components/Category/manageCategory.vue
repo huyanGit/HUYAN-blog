@@ -39,6 +39,7 @@
 import categoryResource from '../../axios/category'
 import blogResource from '../../axios/blog'
 import timeFilter from '../../utils/filters'
+import removeByValue from '../../utils/tool'
 export default {
   data() {
     return {
@@ -56,12 +57,14 @@ export default {
         type: 'warning'
       }).then(() => {
         for(let i = 0; i<category.blogs.length; i++){
-          console.log(category.blogs[i]._id);
+          console.log('remove blog in ' + category.category_name + ': ' + category.blogs[i].title);
           blogResource.deleteOneBlog(category.blogs[i]._id);
         }
         categoryResource.deleteOneCategory(category._id).then(function(){
-          console.log('remove success');
+          console.log('remove category: ' + category.category_name);
         });
+        //update data
+        removeByValue(this.categories, category);
         this.$message({
           type: 'success',
           message: '删除成功!'
@@ -86,9 +89,6 @@ export default {
     }
   },
   created(){
-    return this.getCategories();
-  },
-  updated(){
     return this.getCategories();
   }
 }

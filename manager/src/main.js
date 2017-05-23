@@ -6,9 +6,6 @@ import 'element-ui/lib/theme-default/index.css'
 Vue.use(Element)
 router.beforeEach((to, from, next) => {
 	document.title = to.meta.title;
-	// if(!window.sessionStorage.getItem('token') && to.path !== '/login'){
-	// 	return next({path: '/login'});
-	// }
 	next();
 });
 new Vue({
