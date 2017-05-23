@@ -55,13 +55,13 @@ export default {
         }).then(() => {
           blogResource.deleteOneBlog(blog._id).then(function(){
             console.log('remove blog :' + blog.title);
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            });            
           });
           //update data
           removeByValue(this.blogs, blog);
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
         }).catch(() => {
           this.$message({
             type: 'info',

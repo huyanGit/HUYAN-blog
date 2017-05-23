@@ -42,8 +42,9 @@ export default {
             return false;
           }
         }
-        tagResource.createOneTag(vm.newtag);
-        vm.submitSuccess(formName);
+        tagResource.createOneTag(vm.newtag).then(function(){
+          vm.submitSuccess(formName);
+        }); 
       });
     },
     updateOneTag(formName){
@@ -59,8 +60,9 @@ export default {
             return false;
           }
         }
-        tagResource.updateOneTag(vm.tag_update_id, vm.newtag);
-        vm.submitSuccess(formName);
+        tagResource.updateOneTag(vm.tag_update_id, vm.newtag).then(function(){
+          vm.submitSuccess(formName);
+        });  
       });
     },
     submitSuccess(formName){

@@ -74,10 +74,6 @@ export default {
           if (valid) {
             console.log(vm.newblog);
             vm.createOneBlog(vm.newblog);
-            vm.$message({
-              message: '发布成功！',
-              type: 'success'
-            });
             setTimeout(function(){
               vm.resetForm(formName);
             },200);      
@@ -89,10 +85,6 @@ export default {
         vm.$refs[formName].validate((valid) => {
           if(valid) {
             vm.updateOneBlog(vm.blog_update_id, vm.newblog);
-            vm.$message({
-              message: '修改成功！',
-              type: 'success'
-            });
             setTimeout(function(){
               vm.resetForm(formName);
             },200);
@@ -104,16 +96,18 @@ export default {
     },
     createOneBlog: function(data){
       return blogResource.createOneBlog(data).then(function(res){
-        console.log(res.data);
-      }).catch(function(err){
-        alert(err);
+        vm.$message({
+          message: '发布成功！',
+          type: 'success'
+        });
       });
     },
     updateOneBlog: function(blogId, data){
       return blogResource.updateOneBlog(blogId, data).then(function(res){
-        console.log(res.data);
-      }).catch(function(err){
-        alert(err);
+        vm.$message({
+          message: '修改成功！',
+          type: 'success'
+        });
       });
     },
     getTagsAndCategories:function(){

@@ -62,13 +62,13 @@ export default {
         }
         categoryResource.deleteOneCategory(category._id).then(function(){
           console.log('remove category: ' + category.category_name);
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
         });
         //update data
         removeByValue(this.categories, category);
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
       }).catch(() => {
         this.$message({
           type: 'info',

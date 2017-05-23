@@ -62,13 +62,13 @@ export default {
         }
         tagResource.deleteOneTag(tag._id).then(function(){
           console.log('remove tag: ' + tag.tag_name);
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
         });
         //update data
         removeByValue(this.tags, tag);
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
       }).catch(() => {
         this.$message({
           type: 'info',

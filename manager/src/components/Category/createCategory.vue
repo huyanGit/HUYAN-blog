@@ -42,8 +42,9 @@ export default {
             return false;
           }
         }
-        categoryResource.createOneCategory(vm.newcategory);
-        vm.submitSuccess(formName);
+        categoryResource.createOneCategory(vm.newcategory).then(function(){
+          vm.submitSuccess(formName);
+        });
       }); 
     },
     updateOneCategory(formName){
@@ -59,8 +60,9 @@ export default {
             return false;          
           }
         }
-        categoryResource.updateOneCategory(vm.category_update_id, vm.newcategory);
-        vm.submitSuccess(formName);    
+        categoryResource.updateOneCategory(vm.category_update_id, vm.newcategory).then(function(){
+          vm.submitSuccess(formName);  
+        });  
       });
     },
     submitSuccess(formName){
