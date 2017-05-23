@@ -51,7 +51,8 @@ export default {
       console.log(category);
     },
     deleteCategory(category) {  
-      this.$confirm('删除该分类会删除关联的所有文章, 是否继续?', '提示', {
+      var vm = this;
+      vm.$confirm('删除该分类会删除关联的所有文章, 是否继续?', '提示', {
         confirmButtonText: '我已经深思熟虑，确定删除',
         cancelButtonText: '取消',
         type: 'warning'
@@ -62,15 +63,15 @@ export default {
         }
         categoryResource.deleteOneCategory(category._id).then(function(){
           console.log('remove category: ' + category.category_name);
-          this.$message({
+          vm.$message({
             type: 'success',
             message: '删除成功!'
           });
         });
         //update data
-        removeByValue(this.categories, category);
+        removeByValue(vm.categories, category);
       }).catch(() => {
-        this.$message({
+        vm.$message({
           type: 'info',
           message: '已取消删除'
         });          

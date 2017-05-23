@@ -48,22 +48,23 @@ export default {
   },
   methods: {
     deleteBlog(blog) {
-      this.$confirm('此操作将永久删除该篇博客, 是否继续?', '提示', {
+      var vm = this;
+      vm.$confirm('此操作将永久删除该篇博客, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           blogResource.deleteOneBlog(blog._id).then(function(){
             console.log('remove blog :' + blog.title);
-            this.$message({
+            vm.$message({
               type: 'success',
               message: '删除成功!'
             });            
           });
           //update data
-          removeByValue(this.blogs, blog);
+          removeByValue(vm.blogs, blog);
         }).catch(() => {
-          this.$message({
+          vm.$message({
             type: 'info',
             message: '已取消删除'
           });          

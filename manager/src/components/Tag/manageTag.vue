@@ -51,7 +51,8 @@ export default {
       console.log(tag);
     },
     deleteTag(tag) {  
-      this.$confirm('删除该标签会删除关联的所有文章, 是否继续?', '提示', {
+      var vm = this;
+      vm.$confirm('删除该标签会删除关联的所有文章, 是否继续?', '提示', {
         confirmButtonText: '我已经深思熟虑，确定删除',
         cancelButtonText: '取消',
         type: 'warning'
@@ -62,15 +63,15 @@ export default {
         }
         tagResource.deleteOneTag(tag._id).then(function(){
           console.log('remove tag: ' + tag.tag_name);
-          this.$message({
+          vm.$message({
             type: 'success',
             message: '删除成功!'
           });
         });
         //update data
-        removeByValue(this.tags, tag);
+        removeByValue(vm.tags, tag);
       }).catch(() => {
-        this.$message({
+        vm.$message({
           type: 'info',
           message: '已取消删除'
         });          

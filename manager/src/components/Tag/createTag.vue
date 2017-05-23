@@ -44,6 +44,7 @@ export default {
         }
         tagResource.createOneTag(vm.newtag).then(function(){
           vm.submitSuccess(formName);
+          vm.$router.push('/tag/manage');
         }); 
       });
     },
@@ -62,18 +63,16 @@ export default {
         }
         tagResource.updateOneTag(vm.tag_update_id, vm.newtag).then(function(){
           vm.submitSuccess(formName);
+          vm.$router.push('/tag/manage');
         });  
       });
     },
     submitSuccess(formName){
-      var vm = this;
-      vm.$message({
-        message: '添加成功！',
+      this.$message({
+        message: '操作成功！',
         type: 'success'
       });
-      setTimeout(function(){
-        vm.resetForm(formName);
-      },200);   
+  
     },
     submitTag(formName){
       var vm = this;

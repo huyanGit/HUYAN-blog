@@ -44,6 +44,7 @@ export default {
         }
         categoryResource.createOneCategory(vm.newcategory).then(function(){
           vm.submitSuccess(formName);
+          vm.$router.push('/category/manage');
         });
       }); 
     },
@@ -61,19 +62,16 @@ export default {
           }
         }
         categoryResource.updateOneCategory(vm.category_update_id, vm.newcategory).then(function(){
-          vm.submitSuccess(formName);  
+          vm.submitSuccess(formName);
+          vm.$router.push('/category/manage'); 
         });  
       });
     },
     submitSuccess(formName){
-      var vm = this;
-      vm.$message({
-        message: '添加成功！',
+      this.$message({
+        message: '操作成功！',
         type: 'success'
       });
-      setTimeout(function(){
-        vm.resetForm(formName);
-      },200);   
     },
     submitCategory(formName){
       var vm = this;

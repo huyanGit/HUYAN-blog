@@ -72,42 +72,35 @@ export default {
       if(vm.blog_update_id == ''){
         vm.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log(vm.newblog);
-            vm.createOneBlog(vm.newblog);
-            setTimeout(function(){
-              vm.resetForm(formName);
-            },200);      
-          } else {
-            return false;
+            vm.createOneBlog(vm.newblog);    
           }
         });
       }else{
         vm.$refs[formName].validate((valid) => {
           if(valid) {
             vm.updateOneBlog(vm.blog_update_id, vm.newblog);
-            setTimeout(function(){
-              vm.resetForm(formName);
-            },200);
-          }else{
-            return false;
           }
         });
       }
     },
     createOneBlog: function(data){
+      var vm = this;
       return blogResource.createOneBlog(data).then(function(res){
         vm.$message({
           message: '发布成功！',
           type: 'success'
         });
+        vm.$router.push('/blog/manage');
       });
     },
     updateOneBlog: function(blogId, data){
+      var vm = this;
       return blogResource.updateOneBlog(blogId, data).then(function(res){
         vm.$message({
           message: '修改成功！',
           type: 'success'
         });
+        vm.$router.push('/blog/manage');
       });
     },
     getTagsAndCategories:function(){
