@@ -22,9 +22,6 @@ const BlogSchema = new Schema({
 });
 BlogSchema.pre('save', function(next) {
 	this.update_at = Date.now;
-	// this.title = pangu.spacing(this.title);
-	// this.markdown.summary = pangu.spacing(this.markdown.summary);
-	// this.markdown.body = pangu.spacing(this.markdown.body);
 	this.html.summary = marked(this.markdown.summary);
 	this.html.body = marked(this.markdown.body);
 	next();

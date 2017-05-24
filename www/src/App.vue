@@ -60,6 +60,7 @@ export default {
 
 <style>
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+/*下拉菜单*/
 .bounce-enter-active {
   animation: bounce-in .5s;
 }
@@ -96,11 +97,7 @@ body{
 a{
   color: #1D8CE0;
 }
-#app{
-  position: relative;
-  width: 100%;
-  min-height: 100%;
-}
+
 .container{
   display: flex;
   justify-content: center;
@@ -118,12 +115,10 @@ a{
 }
 .nav{
   height: 80px;
-  width: 100%;
   background-color: #eee;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);
 }
 .nav-link ul li{
-  list-style: none;
   display: inline;
   margin: 0 5px;
 }
@@ -146,7 +141,6 @@ a:focus, a:hover {
 .logo{
   font-size: 22px;
   font-weight: bolder;
-
 }
 .logo a:focus{
   color:#1D8CE0;
@@ -183,10 +177,12 @@ a:focus, a:hover {
   padding: 4px;
   border-radius: 8px;
   color: #555;
+  white-space: pre;
 }
 #app pre{
   border-radius: 8px;
   border: none;
+  background-color: #f3f3f3;
 }
 #app .detail .detail-content .blog p{
   font-size: 16px;

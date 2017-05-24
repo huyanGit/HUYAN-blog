@@ -1,4 +1,5 @@
 <template>
+<div>
 	<el-form label-position="top" label-width="80px" :model="newblog" ref="newblog" :rules="rules">
     <el-form-item label="文章标题" prop="title" required>
       <el-input v-model="newblog.title"></el-input>
@@ -26,7 +27,7 @@
     <el-form-item label="文章概述" prop="markdown.summary" required>
       <el-input
         type="textarea"
-        :autosize="{ minRows: 3, maxRows: 15}"
+        :autosize="{ minRows: 3, maxRows: 3}"
         placeholder="请输入内容"
         v-model="newblog.markdown.summary">
       </el-input>
@@ -34,7 +35,7 @@
     <el-form-item label="文章主体" prop="markdown.body" required>
       <el-input
         type="textarea"
-        :autosize="{ minRows: 6, maxRows: 15}"
+        :autosize="{ minRows: 6, maxRows: 6}"
         placeholder="请输入内容"
         v-model="newblog.markdown.body">
       </el-input>
@@ -44,7 +45,7 @@
       <el-button @click="resetForm('newblog')">重置</el-button>
     </el-form-item>   
   </el-form>
-
+</div> 
 </template>
 <script>
 import tagResource from '../../axios/tag'
@@ -149,3 +150,6 @@ export default {
   }
 }	
 </script>
+<style scoped>
+
+</style>
