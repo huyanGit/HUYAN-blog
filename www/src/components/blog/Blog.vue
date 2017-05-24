@@ -11,7 +11,7 @@
 		    	</div>
 		    </div>
 		    <div class="blog-content">
-		    	<p>{{blog.content | blogLengthFilter(150)}}</p>
+		    	<div v-html="blog.html.summary"></div>
 		    </div>
 		    <div class="blog-findall">
 		    	<router-link :to="'/blog/' + blog._id">查看原文</router-link>
@@ -56,7 +56,7 @@ export default {
 <style>
 .blog-list{
 	width: inherit;
-	margin: 10px auto;
+	margin: 10px auto 30px;
 }
 .blog-head{
 	color: #888;
@@ -82,7 +82,5 @@ export default {
 	font-size: 15px;
 	border-bottom: 1px dashed #666;
 }
-.blog-content p{
-	margin-bottom: 5px;
-}
+
 </style>

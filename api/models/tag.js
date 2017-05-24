@@ -4,11 +4,11 @@ const ObjectId = Schema.Types.ObjectId;
 const TagSchema = new Schema({
 	tag_name: {type: String},
 	create_at: {type: Date, default: Date.now},
-	updata_at: {type: Date, default: Date.now}
+	update_at: {type: Date, default: Date.now}
 });
 
-TagSchema.pre('save', next => {
-	this.updata_at = Date.now;
+TagSchema.pre('save', function(next) {
+	this.update_at = Date.now;
 	next();
 });
 

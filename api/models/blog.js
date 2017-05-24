@@ -1,23 +1,37 @@
 const mongoose = require('mongoose');
+const marked = require('marked');
+const pangu = require('pangu');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 const BlogSchema = new Schema({
 	title: {type: String},
-	content: {type: String},
+	markdown: {
+			summary: String,
+			body: String
+	},
+	html: {
+			summary: String,
+			body: String
+	},
 	category: {type: ObjectId, ref: 'Category'},
 	tags: [{type: ObjectId, ref: 'Tag'}],
 	comment_count: {type: Number, default: 0},
 	click_count: {type: Number, default: 0},
 	create_at: {type: Date, default: Date.now},
-	updata_at: {type: Date, default: Date.now}
+	update_at: {type: Date, default: Date.now}
 });
-BlogSchema.pre('save', next => {
-	this.updata_at = Date.now;
+BlogSchema.pre('save', function(next) {
+	this.update_at = Date.now;
+	// this.title = pangu.spacing(this.title);
+	// this.markdown.summary = pangu.spacing(this.markdown.summary);
+	// this.markdown.body = pangu.spacing(this.markdown.body);
+	this.html.summary = marked(this.markdown.summary);
+	this.html.body = marked(this.markdown.body);
 	next();
 })
 BlogSchema.statics = {
 	findBlogByQuery: function (query, obt) {
-		return this.find(query, {}, obt).populate(['category', 'tags']).exec();
+		return this.find(query, {'markdown': 0, 'html.body': 0}, obt).populate(['category', 'tags']).exec();
 	},
 	findBlogById: function (blogId) {
 		return this.findById(blogId).populate(['category', 'tags']).exec();
@@ -27,12 +41,6 @@ BlogSchema.statics = {
 	},
 	deleteBlogById: function (blogId) {
 		return this.remove({_id: blogId}).exec();
-	},
-	deleteCategoryInBlog: function (categoryId) {
-		return this.update({category: categoryId}, {$unset: {categoryId: 1}}, {multi: 1});
-	},
-	deleteTagInBlog: function (tagId) {
-		return this.update({tags: tagId}, {$pull: {tags: tagId}}, {multi: 1});
 	},
 	getBlogArchives: function() {
 		return this.aggregate([

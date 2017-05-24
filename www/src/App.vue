@@ -176,7 +176,35 @@ a:focus, a:hover {
   left: 0;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);
 }
-
+#app code{
+  font-size: 14px;
+  font-family: Source Code Pro,monospace;
+  background-color: #f3f3f3;
+  padding: 4px;
+  border-radius: 8px;
+  color: #555;
+}
+#app pre{
+  border-radius: 8px;
+  border: none;
+}
+#app .detail .detail-content .blog p{
+  font-size: 16px;
+  line-height: 2;
+  margin: 20px 10px;
+  color: #555;
+}
+#app .detail .detail-content .blog li{
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 5px 0;
+}
+#app .detail .detail-content .blog h3{
+  font-size: 24px;
+  font-weight: 400;
+  color: #222;
+  margin: 30px 10px 20px;  
+}
 @media screen and (max-width: 900px) {
   .search{
     display: none;
@@ -220,13 +248,32 @@ a:focus, a:hover {
   .content .blog-content{
     font-size: 13px;
   }
+  #app .content .blog-list{
+    margin: 10px auto;
+  }
   /*详情*/
-  #app .content .detail{
-    font-size: 21px;
-  }
-  #app .content p{
+  #app .detail .detail-content .blog ul{
     font-size: 13px;
+    margin-left: 30px;
+    margin-bottom: 20px;
   }
+  #app .detail .detail-content .blog p{
+    font-size: 13px;
+    line-height: 2;
+    margin: 20px 10px;
+    color: #555;
+  }
+  #app .detail .detail-content .blog li{
+    line-height: 1.6;
+    font-size: 13px;
+    margin: 5px 0;
+  }
+  #app .detail .detail-content .blog h3{
+    font-size: 17px;
+    font-weight: 400;
+    color: #222;
+    margin: 10px;  
+  }  
   /*分类*/
   #app .content .category-name{
     font-size: 17px;
@@ -246,7 +293,7 @@ a:focus, a:hover {
     padding: 0;
   }
   #app .content ul a{
-    font-size: 14px;
+    font-size: 13px;
     color: #1D8CE0;
   }
   /*标签*/

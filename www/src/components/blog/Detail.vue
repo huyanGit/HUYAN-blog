@@ -10,7 +10,8 @@
 				</div>
 			</div>
 			<div class="detail-content">
-				<p>{{blog.content}}</p>
+				<div v-html="blog.html.summary" class="blog"></div>
+				<div v-html="blog.html.body" class="blog" v-highlight></div>
 			</div>
 		</div>
 	</div>
@@ -31,6 +32,7 @@ export default{
 			var blogId = vm.$parent.$route.params.blogId;
 			blogResource.getBlogById(blogId).then(function(res){
 				vm.blog = res.data;
+				console.log(vm.blog.category.category_name);
 			});
 		}
 	},
@@ -70,4 +72,5 @@ export default{
  	line-height: 2;
   margin: 20px 10px;
 }
+
 </style>

@@ -23,12 +23,20 @@
         </el-option>
       </el-select>   
     </el-form-item>
-    <el-form-item label="文章内容" prop="content" required>
+    <el-form-item label="文章概述" prop="markdown.summary" required>
       <el-input
         type="textarea"
-        :autosize="{ minRows: 5, maxRows: 15}"
+        :autosize="{ minRows: 3, maxRows: 15}"
         placeholder="请输入内容"
-        v-model="newblog.content">
+        v-model="newblog.markdown.summary">
+      </el-input>
+    </el-form-item>
+    <el-form-item label="文章主体" prop="markdown.body" required>
+      <el-input
+        type="textarea"
+        :autosize="{ minRows: 6, maxRows: 15}"
+        placeholder="请输入内容"
+        v-model="newblog.markdown.body">
       </el-input>
     </el-form-item>
     <el-form-item>
@@ -46,10 +54,13 @@ export default {
   data() {
     return {
       newblog: {
-        title:'',
-        content:'',        
+        title:'',       
         category:'',
-        tags:[]
+        tags:[],
+        markdown:{
+          summary:'',
+          body:''
+        }
       },
       blog_update_id:'',
       submit:'',
@@ -58,8 +69,7 @@ export default {
       rules:{
         title:[{required: true, message:'请输入文章标题', trigger:'blur'}],
         category:[{required: true, message:'请选择文章分类', trigger:'change'}],
-        tags:[{type: 'array', required: true, message:'请选择文章标签', trigger:'change'}],
-        content:[{required: true, message:'请输入文章内容', trigger:'blur'}]
+        tags:[{type: 'array', required: true, message:'请选择文章标签', trigger:'change'}]
       }
     };
   },
@@ -117,7 +127,7 @@ export default {
       blogResource.getOneBlog(vm.blog_update_id).then(function(res){
         let blog = vm.newblog, data = res.data;
         blog.title = data.title;
-        blog.content = data.content;
+        blog.markdown = data.markdown;
         blog.category = data.category._id;
         for(let i = 0; i < data.tags.length; i++){
           blog.tags.push(data.tags[i]._id);

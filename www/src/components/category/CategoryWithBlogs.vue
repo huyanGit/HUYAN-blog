@@ -12,7 +12,7 @@
 					</div>
 				</div>
 				<div class="blog-content">
-					<p>{{blog.content | blogLengthFilter(150)}}</p>
+					<div v-html="blog.html.summary"></div>
 				</div>
 				<div class="blog-findall">
 		    	<router-link :to="'/blog/' + blog._id">查看原文</router-link>
