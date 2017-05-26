@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import {timeFilter,blogLengthFilter} from '../../utils/filters'
+import {timeFilter} from '../../utils/filters'
 import tagResource from '../../axios/tag'
 import blogResource from '../../axios/blog'
 export default{
@@ -53,9 +53,6 @@ export default{
 	filters:{
   	timeFilter: function(time){
   		return timeFilter(time).substr(0, 10);
-  	},
-  	blogLengthFilter: function(content, length){
-  		return blogLengthFilter(content, length) + '···';
   	}
 	},
 	created(){

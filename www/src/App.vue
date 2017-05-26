@@ -33,7 +33,9 @@
       </transition>  
     </nav>
     <div class="content" :style="{minHeight: contentHeight + 'px'}">
-      <router-view></router-view>
+      <transition name='page'>
+        <router-view></router-view>
+      </transition>
     </div>
     <footer class="footer">
       <div class="copyright">Copyright &copy {{year}} HUYAN<span class="accreditation">皖ICP备17011874号</span></div>
@@ -66,6 +68,13 @@ export default {
 }
 .bounce-leave-active {
   animation: bounce-out .5s;
+}
+/*page 动画*/
+.page-enter{
+  transform: translateY(50px);
+}
+.page-enter-active{
+  transition: transform 1s;
 }
 @keyframes bounce-in {
   0% {
@@ -315,6 +324,9 @@ a:focus, a:hover {
   }
   #app .content .about ul li a{
     font-size: 13px;
+  }
+  #app .footer .copyright{
+    font-size: 14px;
   }
 }
 </style>

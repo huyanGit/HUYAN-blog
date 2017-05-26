@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="category-head">{{category.category_name}}</div>
+		<div class="category-head">{{category.category_name}}<span class="blog-number">(共有{{category.count}}篇文章)</span></div>
 		<div class="category-blog" v-for="blog in blogs">
 			<div v-if="blog.category.category_name == category.category_name" class="blog-list">			
 				<div class="blog-head">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {timeFilter,blogLengthFilter} from '../../utils/filters'
+import {timeFilter} from '../../utils/filters'
 import categoryResource from '../../axios/category'
 import blogResource from '../../axios/blog'
 export default{
@@ -51,21 +51,22 @@ export default{
 	filters:{
   	timeFilter: function(time){
   		return timeFilter(time).substr(0, 10);
-  	},
-  	blogLengthFilter: function(content, length){
-  		return blogLengthFilter(content, length) + '···';
   	}
 	},
 	created(){
-		return this.getCategoryById();
-	},
-	beforeMount(){
-		return this.getBlogs();
+		this.getCategoryById();
+		this.getBlogs();
 	}
 }
 </script>
 
 <style scoped>
+.blog-number{
+	font-size: 16px;
+  font-weight: 200; 
+  margin-left: 10px;
+  color: #999;
+}
 .category-head{
   font-size: 28px;
   font-weight: 600;

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const marked = require('marked');
-const pangu = require('pangu');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 const BlogSchema = new Schema({

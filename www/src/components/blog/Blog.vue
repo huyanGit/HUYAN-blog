@@ -23,7 +23,7 @@
 
 <script>
 import blogResource from '../../axios/blog'
-import {blogLengthFilter, timeFilter} from '../../utils/filters'
+import {timeFilter} from '../../utils/filters'
 export default {
   data () {
     return {
@@ -41,9 +41,6 @@ export default {
   filters: {
   	timeFilter: function(time){
   		return timeFilter(time).substr(0, 10);
-  	},
-  	blogLengthFilter: function(content, length){
-  		return blogLengthFilter(content, length) + '···';
   	}
   },
   created() {
