@@ -17,12 +17,16 @@ export default{
 	margin: 0 auto;
 	position: relative;
 	top:100px;
-	background-color: #eee;
 	width: 500px;
 }	
 .notfound span{
 	color: #888;
 	font-size: 40px;
 	margin-left: 20px;
+}
+@media screen and (max-width: 600px){
+	.notfound{
+		width: auto;
+	}
 }
 </style>
