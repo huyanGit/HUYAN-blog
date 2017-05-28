@@ -1,7 +1,7 @@
 <template>
 	<div>
-		<div class="category-head">{{category.category_name}}<span class="blog-number">(共有{{category.count}}篇文章)</span></div>
-		<div class="category-blog" v-for="blog in blogs">
+		<div class="category-head">标签『{{category.category_name}}』<span class="blog-number">(共有{{category_count}}篇文章)</span></div>
+		<div class="category-blog" v-for="(blog, index) in blogs">
 			<div v-if="blog.category.category_name == category.category_name" class="blog-list">			
 				<div class="blog-head">
 					<router-link :to="'/blog/' + blog._id" class="blog-title">{{blog.title}}</router-link :to="'/blog/' + blog._id">
@@ -17,7 +17,7 @@
 				<div class="blog-findall">
 		    	<router-link :to="'/blog/' + blog._id">查看原文</router-link>
 		    </div>
-	    </div>		
+	    </div>
 		</div>
 	</div>
 </template>
@@ -30,7 +30,8 @@ export default{
 	data(){
 		return {
 			category:{},
-			blogs:[]
+			blogs:[],
+			category_count:''
 		}
 	},
 	methods:{
@@ -45,6 +46,13 @@ export default{
 			var vm = this;
 			return blogResource.getBlogs().then(function(res){
 				vm.blogs = res.data;
+				let count = 0;
+				for(let i = 0; i < vm.blogs.length; i++){
+					if(vm.blogs[i].category.category_name === vm.category.category_name){
+						count++;
+					}
+				}
+				vm.category_count = count;
 			});
 		}
 	},
@@ -62,7 +70,7 @@ export default{
 
 <style scoped>
 .blog-number{
-	font-size: 16px;
+	font-size: 18px;
   font-weight: 200; 
   margin-left: 10px;
   color: #999;

@@ -249,6 +249,9 @@ a:focus, a:hover {
   #app .content .blog-findall a{
     font-size: 13px;
   }
+  #app code{
+    font-size: 13px;
+  }
   /*首页*/
   .content .blog-title{
     font-size: 17px;
@@ -287,7 +290,7 @@ a:focus, a:hover {
     font-size: 17px;
   }
   #app .content .blog-number{
-    font-size: 13px;
+    font-size: 16px;
   }
   #app .category{
     padding-top: 15px

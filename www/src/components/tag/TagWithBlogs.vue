@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="tag-head">{{tag.tag_name}}</div>
+		<div class="tag-head">标签『{{tag.tag_name}}』<span class="blog-number">(共有{{tag_count}}篇文章)</span></div>
 		<div class="tag-blog" v-for="blog in blogs">
 			<div v-for="_tag in blog.tags">
 				<div v-if="_tag.tag_name == tag.tag_name" class="blog-list">			
@@ -32,7 +32,8 @@ export default{
 	data(){
 		return {
 			tag:{},
-			blogs:[]
+			blogs:[],
+			tag_count:''
 		}
 	},
 	methods:{
@@ -47,6 +48,15 @@ export default{
 			var vm = this;
 			return blogResource.getBlogs().then(function(res){
 				vm.blogs = res.data;
+				let count = 0;
+				for(let i = 0; i < vm.blogs.length; i++){
+					for(let j = 0; j < vm.blogs[i].tags.length; j++){
+						if(vm.blogs[i].tags[j].tag_name === vm.tag.tag_name){
+							count++;
+						}
+					}
+				}
+				vm.tag_count = count;
 			});
 		}
 	},
@@ -65,6 +75,12 @@ export default{
 </script>
 
 <style scoped>
+.blog-number{
+	font-size: 18px;
+  font-weight: 200; 
+  margin-left: 10px;
+  color: #999;
+}
 .tag-head{
   font-size: 28px;
   font-weight: 600;

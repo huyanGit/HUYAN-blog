@@ -1,5 +1,5 @@
 module.exports = {
 	port:3000,
-	jwt_cert: 'MYBLOG_JWT_CERT',
-	mongodb: 'mongodb://localhost/huyan-blog'
+	jwt_cert: 'BLOG_JWT_CERT',
+	mongodb: 'mongodb://localhost/blog'
 }
