@@ -1,4 +1,4 @@
-# HUYAN_blog
+# HUYAN-blog
 
 ## Features
 
@@ -17,6 +17,7 @@
 ### Manager
 
 + [Vue](https://cn.vuejs.org/)
++ [vue-router](https://github.com/vuejs/vue-router)
 + [Element](http://element.eleme.io/)
 
 
