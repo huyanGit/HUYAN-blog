@@ -213,6 +213,11 @@ a:focus, a:hover {
   color: #222;
   margin: 30px 10px 20px;  
 }
+#app p img{
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
 @media screen and (max-width: 900px) {
   .search{
     display: none;

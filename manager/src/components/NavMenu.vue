@@ -1,6 +1,6 @@
 <template>
   <div class="manage">
-    <nav :style="{height: innerheight + 'px'}">
+    <nav :style="{minHeight: innerheight + 'px'}">
       <el-menu theme="dark" :router="true">
         <div class="title">博客管理系统</div>
         <el-submenu index="1">
@@ -8,6 +8,7 @@
           <el-menu-item-group>
             <el-menu-item index="/blog/create">发布文章</el-menu-item>
             <el-menu-item index="/blog/manage">管理文章</el-menu-item>
+            <el-menu-item index="/upload/picture">上传图片</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">

@@ -21,14 +21,9 @@ function mkdirIfNotExist(dir, callback) {
 		}
 	});
 }
-function getNowTimeStempSub(length) {
-  return Date.now().toString().substring(13 - length, 13)
-}
-
 uploadController.storagePicture =  {
   destination(req, file, callback) {
     const dir = path.resolve(configs.upload_dir, 'pictures');
-    console.log(dir);
     mkdirIfNotExist(dir, err => {
       if (err) {
         return callback(err)
@@ -43,7 +38,7 @@ uploadController.storagePicture =  {
     if (!configs.upload_allow_types.test(ext)) {
       return callback(new HttpError.BadRequestError('上传的不是图片文件'));
     }
-    return callback(null, utils.md5(getNowTimeStempSub(8)) + '.' + ext);
+    return callback(null, file.originalname);
   }
 };
 uploadController.handleResult = (req, res, next) => {

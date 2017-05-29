@@ -6,6 +6,7 @@ import createTag from '../components/Tag/createTag'
 import manageTag from '../components/Tag/manageTag'
 import createCategory from '../components/Category/createCategory'
 import manageCategory from '../components/Category/manageCategory'
+import UploadPicture from '../components/Upload/UploadPicture'
 import Login from '../components/Login'
 import NavMenu from '../components/NavMenu'
 Vue.use(Router);
@@ -16,6 +17,7 @@ const routes = [
 		children:[
 			{path: '/blog/create', component: createBlog, meta: {title:'博客管理系统 | 发布博客'}},
 			{path: '/blog/manage', component: manageBlog, meta: {title:'博客管理系统 | 文章管理'}},
+			{path: '/upload/picture', component: UploadPicture, meta: {title:'博客管理系统 | 图片上传'}},
 			{path: '/tag/create', component: createTag, meta: {title:'博客管理系统 | 添加标签'}},
 			{path: '/tag/manage', component: manageTag, meta: {title:'博客管理系统 | 标签管理'}},
 			{path: '/category/create', component: createCategory, meta: {title:'博客管理系统 | 添加分类'}},
