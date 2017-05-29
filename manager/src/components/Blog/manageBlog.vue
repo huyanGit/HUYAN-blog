@@ -33,6 +33,11 @@
           @click="deleteBlog(scope.row)">删除</el-button>
       </template>
     </el-table-column>
+    <el-table-column label="浏览次数">
+      <template scope="scope">
+        <span>{{scope.row.click_count}}</span>
+      </template>
+    </el-table-column>
   </el-table>
 </template>
 
