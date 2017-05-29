@@ -4,6 +4,8 @@ const blogController = require('./blog');
 const categoryController = require('./category');
 const tagController = require('./tag');
 const adminController = require('./admin');
+const multer = require('multer');
+const uploadController = require('./upload');
 const adminRequired = require('../middlewares').auth.adminRequired;
 router.route('/blog')
 	.get(blogController.getBlogs)
@@ -45,7 +47,12 @@ router.route('/archive')
 router.route('/admin/authorization')
 	.post(adminController.authorize)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
-	
+
+router.route('/upload/picture')
+	.post(multer({storage: multer.diskStorage(uploadController.storagePicture)}).single('picture'),
+    uploadController.handleResult)
+	.all(() => {throw new HttpError.MethodNotAllowedError()});
+		
 module.exports = router;
 
 

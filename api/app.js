@@ -11,6 +11,7 @@ app.use(middlewares.list);
 app.use(bodyParser.json());
 app.use(middlewares.auth.authorization);
 app.use(controllers);
+app.use('/upload', express.static('uploads'));
 app.use(middlewares.errorHeadling);
 
 const env = process.env.NODE_ENV || 'development';
