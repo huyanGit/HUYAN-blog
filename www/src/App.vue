@@ -106,7 +106,9 @@ body{
 a{
   color: #1D8CE0;
 }
-
+p{
+  margin: 0;
+}
 .container{
   display: flex;
   justify-content: center;
@@ -250,6 +252,9 @@ a:focus, a:hover {
   }
   .drop-nav{
     padding: 12px 0;
+  }
+  #app .blog{
+    margin-bottom: 15px;
   }
   #app .content .blog-findall a{
     font-size: 13px;

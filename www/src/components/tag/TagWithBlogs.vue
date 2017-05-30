@@ -89,4 +89,9 @@ export default{
 .blog-list{
 	margin: 15px auto;
 }
+@media screen and (max-width: 600px) {
+	.tag-head{
+		font-size: 24px;
+	}
+}	
 </style>

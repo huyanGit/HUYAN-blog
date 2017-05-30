@@ -12,9 +12,8 @@ blogController.getBlogs = (req, res, next) => {
 
 blogController.getOneBlog = (req, res, next) => {
 	const blogId = req.params.blogId;
+	Blog.findOneAndUpdate({_id: blogId}, {$inc: {click_count: 1}});
 	Blog.findBlogById(blogId).then(blog => {
-		return Blog.findOneAndUpdate({_id: blog._id}, {$inc: {click_count: 1}});
-	}).then(blog => {
 		res.success(blog, 200);
 	}).catch(next);
 };

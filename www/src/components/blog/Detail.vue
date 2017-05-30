@@ -32,7 +32,7 @@ export default{
 			var blogId = vm.$parent.$route.params.blogId;
 			blogResource.getBlogById(blogId).then(function(res){
 				vm.blog = res.data;
-				console.log(vm.blog.category.category_name);
+				console.log(vm.blog);
 			});
 		}
 	},
