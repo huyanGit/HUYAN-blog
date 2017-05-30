@@ -14,16 +14,36 @@
 				<div v-html="blog.html.body" class="blog" v-highlight></div>
 			</div>
 		</div>
+		<div class="comment-area">
+			<div class="comment-header">评论区</div>
+			<div class="comment-list" v-for="item in comments" v-if="item.blog._id == blog._id">
+				<div class="comment-main">
+					<div>{{item.user}}:<span class="com-content">{{item.content}}</span><span class="rely" @click="rely">回复</span></div>
+				</div>
+			</div>
+			<div class="comment-box">
+				<textarea placeholder="说点什么吧" class="comment-content" v-model="comment.content"></textarea>
+				<input type="text" placeholder="称呼" class="name" v-model="comment.user">
+				<button class="comment" @click="submit">评论</button>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
 import blogResource from '../../axios/blog'
+import commentResource from '../../axios/comment'
 import {timeFilter} from '../../utils/filters'
 export default{
 	data(){
 		return {
-			blog: {}
+			blog: {},
+			comments:[],
+			comment: {
+				user:'',
+				content:'',
+				blog:''
+			}
 		}
 	},
 	methods: {
@@ -32,8 +52,25 @@ export default{
 			var blogId = vm.$parent.$route.params.blogId;
 			blogResource.getBlogById(blogId).then(function(res){
 				vm.blog = res.data;
-				console.log(vm.blog);
 			});
+		},
+		getAllComments: function(){
+			var vm = this;
+			commentResource.getAllComments().then(function(res){
+				vm.comments = res.data;
+			});
+		},
+		submit: function(){
+			var vm = this;
+			vm.comment.blog = vm.blog._id;
+			commentResource.createComment(vm.comment).then(function(res){
+				vm.getAllComments();
+				vm.comment.user = vm.comment.content = '';
+			});
+		},
+		rely: function(){
+			var vm = this;
+			vm.comment.content = '@' ;
 		}
 	},
 	filters:{
@@ -42,7 +79,8 @@ export default{
 		}
 	},
 	created(){
-		return this.getBlogById();
+		this.getBlogById();
+		this.getAllComments();
 	}
 }
 </script>
@@ -72,5 +110,59 @@ export default{
  	line-height: 2;
   margin: 20px 10px;
 }
-
+.comment-header{
+	font-size: 20px;
+  font-weight: 400;
+  color: #555;
+  margin-top: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+.comment-main{
+	height: 40px;
+	line-height: 40px;
+}
+.com-content{
+	margin-left: 10px;
+}
+.comment-list{
+	font-size: 16px;
+	color: #555;
+	border-bottom: 1px dashed #eee;
+}
+.rely{
+	display: inline-block;
+	float: right;
+	font-size: 15px;
+	color: #1D8CE0;
+}
+.rely:hover{
+	color: #337ab7;
+	cursor: pointer;
+}
+.comment-content{
+	display: block;
+	margin:30px auto 10px;
+	width: 100%;
+	height: 80px;
+	border-radius: 5px;
+	border: 1px solid #9d9d9d;
+	outline: none;
+}
+.name{
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 4px;
+	border: 1px solid #9d9d9d;
+	outline: none;
+}
+.comment{
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 4px;
+	border: none;
+	background-color: #1D8CE0;
+	color: #fff;
+	outline: none;
+}
 </style>

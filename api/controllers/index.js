@@ -4,6 +4,7 @@ const blogController = require('./blog');
 const categoryController = require('./category');
 const tagController = require('./tag');
 const adminController = require('./admin');
+const commentController = require('./comment');
 const multer = require('multer');
 const uploadController = require('./upload');
 const adminRequired = require('../middlewares').auth.adminRequired;
@@ -39,6 +40,15 @@ router.route('/tag/:tagId')
 	.put(adminRequired, tagController.updateOneTag)
 	.delete(adminRequired, tagController.deleteOneTag)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
+
+router.route('/comment')
+	.get(commentController.getAllComments)
+	.post(commentController.createOneComment)
+	.all(() => {throw new HttpError.MethodNotAllowedError()});
+
+router.route('/comment/:commentId')
+  .delete(commentController.deleteOneComment)
+  .all(() => {throw new HttpError.MethodNotAllowedError()});
 
 router.route('/archive')
 	.get(blogController.getArchives)
