@@ -16,10 +16,10 @@
 		</div>
 		<div class="comment-area">
 			<div class="comment-header">评论区</div>
-			<div class="comment-list" v-for="item in comments" v-if="item.blog._id == blog._id">
-				<div class="comment-main">
-					<div>{{item.user}}:<span class="com-content">{{item.content}}</span><span class="rely" @click="rely">回复</span></div>
-				</div>
+			<div class="comment-list" v-for="(item, index) in comments" v-if="item.blog._id == blog._id" ref="commentList">	
+				<span class="user">{{item.user}}: </span>
+				<span class="com-content">{{item.content}}</span>
+				<span class="rely" @click="rely(index)">回复</span>
 			</div>
 			<div class="comment-box">
 				<textarea placeholder="说点什么吧" class="comment-content" v-model="comment.content"></textarea>
@@ -65,12 +65,13 @@ export default{
 			vm.comment.blog = vm.blog._id;
 			commentResource.createComment(vm.comment).then(function(res){
 				vm.getAllComments();
-				vm.comment.user = vm.comment.content = '';
+				vm.comment.content = '';
 			});
 		},
-		rely: function(){
+		rely: function(index){
 			var vm = this;
-			vm.comment.content = '@' ;
+			let user = vm.$refs.commentList[index].getElementsByClassName('user')[0].innerText;
+			vm.comment.content = '@' + user;
 		}
 	},
 	filters:{
@@ -118,14 +119,12 @@ export default{
   padding-bottom: 5px;
   border-bottom: 1px solid #eee;
 }
-.comment-main{
-	height: 40px;
-	line-height: 40px;
-}
 .com-content{
 	margin-left: 10px;
 }
 .comment-list{
+	height: 40px;
+	line-height: 40px;
 	font-size: 16px;
 	color: #555;
 	border-bottom: 1px dashed #eee;
