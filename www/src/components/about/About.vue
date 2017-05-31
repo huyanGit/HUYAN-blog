@@ -7,7 +7,7 @@
     <div>
       <h2 class="aboutblog">关于博客</h2>
       <p>本博客采用前后端完全分离的架构，后端采用Node框架Express提供API接口，前端页面和后台管理系统采用Vue。Vue是一个基于MVVM的轻量级前端框架，它吸收了Angular和React各自的优点，它的指令系统和组件化的开发方式使得开发变得快捷和高效，是目前非常流行的前端框架。同时Vue提供的vue-cli工具能够快速构建项目骨架并使用webpack进行打包。因为时间仓促，该博客的一些功能并未完善，我会在之后持续更新。</p>
-      <p>该博客项目基于Github开源，不足之处还请多多指正：<a href="https://github.com/huyanGit/my-blog">https://github.com/huyanGit/my-blog</a>。</p>
+      <p>该博客项目基于Github开源，不足之处还请多多指正：<a href="https://github.com/huyanGit/HUYAN-blog">https://github.com/huyanGit/HUYAN-blog</a>。</p>
     </div>
     <div class="link">
       <h2 class="link-title">友情链接</h2>

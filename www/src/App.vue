@@ -263,6 +263,7 @@ a:focus, a:hover {
     font-size: 13px;
   }
   #app code{
+    padding: 2px;
     font-size: 13px;
   }
   /*首页*/
