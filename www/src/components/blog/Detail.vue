@@ -16,10 +16,10 @@
 		</div>
 		<div class="comment-area">
 			<div class="comment-header">评论区</div>
-			<div class="comment-list" v-for="(item, index) in comments" v-if="item.blog._id == blog._id" ref="commentList">	
+			<div class="comment-list" v-for="(item, index) in comments" ref="commentList">	
 				<span class="user">{{item.user}}: </span>
 				<span class="com-content">{{item.content}}</span>
-				<span class="rely" @click="rely(index)">回复</span>
+				<span class="reply" @click="reply(index)">回复</span>
 			</div>
 			<div class="comment-box">
 				<textarea placeholder="说点什么吧" class="comment-content" v-model="comment.content"></textarea>
@@ -57,18 +57,22 @@ export default{
 		getAllComments: function(){
 			var vm = this;
 			commentResource.getAllComments().then(function(res){
-				vm.comments = res.data;
+				for(let i = 0; i < res.data.length; i++){
+					if(res.data[i].blog._id == vm.blog._id){
+						vm.comments.push(res.data[i]);
+					}
+				}
 			});
 		},
 		submit: function(){
 			var vm = this;
 			vm.comment.blog = vm.blog._id;
 			commentResource.createComment(vm.comment).then(function(res){
-				vm.getAllComments();
+				vm.comments.push(res.data);
 				vm.comment.content = '';
 			});
 		},
-		rely: function(index){
+		reply: function(index){
 			var vm = this;
 			let user = vm.$refs.commentList[index].getElementsByClassName('user')[0].innerText;
 			vm.comment.content = '@' + user;
@@ -129,13 +133,13 @@ export default{
 	color: #555;
 	border-bottom: 1px dashed #eee;
 }
-.rely{
+.reply{
 	display: inline-block;
 	float: right;
 	font-size: 15px;
 	color: #1D8CE0;
 }
-.rely:hover{
+.reply:hover{
 	color: #337ab7;
 	cursor: pointer;
 }
@@ -163,5 +167,19 @@ export default{
 	background-color: #1D8CE0;
 	color: #fff;
 	outline: none;
+}
+@media screen and (max-width: 600px) {
+	.comment-list{
+		font-size: 13px;
+	}
+	.reply{
+		font-size: 13px;
+	}
+	.comment-header{
+		font-size: 18px;
+	}
+	.comment-box{
+		font-size: 13px;
+	}
 }
 </style>

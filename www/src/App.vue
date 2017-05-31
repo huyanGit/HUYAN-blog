@@ -253,6 +253,9 @@ a:focus, a:hover {
   .drop-nav{
     padding: 12px 0;
   }
+  #blog{
+    margin-top: 55px;
+  }
   #app .blog{
     margin-bottom: 15px;
   }

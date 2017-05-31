@@ -66,10 +66,8 @@ export default{
   	}
 	},
 	created(){
-		return this.getTagById();
-	},
-	beforeMount(){
-		return this.getBlogs();
+		this.getTagById();
+		this.getBlogs();
 	}
 }
 </script>
