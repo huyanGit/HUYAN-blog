@@ -13,7 +13,7 @@
     </el-table-column>
     <el-table-column
       label="文章信息"
-      width="300px">
+      width="250px">
       <template scope="scope">
         <el-popover trigger="hover" placement="top">
           <p>分类: {{ scope.row.category.category_name }}</p>
@@ -27,6 +27,7 @@
     <el-table-column label="操作">
       <template scope="scope">
         <router-link :to="{path: '/blog/create', query:{id: scope.row._id}}">修改</router-link>
+        <router-link :to="{path: '/blog/comment', query:{id: scope.row._id}}">评论管理</router-link>
         <el-button
           size="small"
           type="danger"

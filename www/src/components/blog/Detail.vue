@@ -67,10 +67,12 @@ export default{
 		submit: function(){
 			var vm = this;
 			vm.comment.blog = vm.blog._id;
-			commentResource.createComment(vm.comment).then(function(res){
-				vm.comments.push(res.data);
-				vm.comment.content = '';
-			});
+			if(vm.comment.user != '' && vm.comment.content != ''){
+				commentResource.createComment(vm.comment).then(function(res){
+					vm.comments.push(res.data);
+					vm.comment.content = '';
+				});
+			}
 		},
 		reply: function(index){
 			var vm = this;
