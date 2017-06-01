@@ -5,7 +5,7 @@
       <ul>
         <li v-for="blog in year.blogs">
           <span class="time">{{blog.create_at | timeFilter}}</span>
-          <router-link :to="'/blog/' + blog._id" class="title">{{blog.title}}</router-link>
+          <router-link :to="'/blog/' + blog.code" class="title">{{blog.title}}</router-link>
         </li>
       </ul>
     </div>

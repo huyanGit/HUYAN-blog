@@ -4,8 +4,8 @@ var blogResource = {
 	getBlogs: function () {
 		return instance.get('/blog');
 	},
-	getBlogById: function (blogId) {
-		return instance.get('/blog/' + blogId);
+	getBlogById: function (blogName) {
+		return instance.get('/blog/' + blogName);
 	}
 }
 

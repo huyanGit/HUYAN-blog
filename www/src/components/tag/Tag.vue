@@ -2,7 +2,7 @@
   <div class="tag">
     <div class="tag_num">共有{{tags.length}}个标签：</div>
     <ul>
-    	<li :style="{fontSize: tag.count*2 + 15 + 'px'}" v-for="tag in tags"><router-link :to="'/tag/' + tag._id">{{tag.tag_name}}</router-link></li>
+    	<li :style="{fontSize: tag.count*2 + 15 + 'px'}" v-for="tag in tags"><router-link :to="'/tag/' + tag.code">{{tag.tag_name}}</router-link></li>
     </ul>
   </div>
 </template>

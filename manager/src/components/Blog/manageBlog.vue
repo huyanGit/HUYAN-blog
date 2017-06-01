@@ -5,7 +5,7 @@
     style="width: 100%">
     <el-table-column
       label="发布日期"
-      width="200px">
+      width="150px">
       <template scope="scope">
         <el-icon name="time"></el-icon>
         <span style="margin-left: 10px">{{ scope.row.create_at | timeFilter(scope.row.create_at)}}</span>
@@ -34,11 +34,11 @@
           @click="deleteBlog(scope.row)">删除</el-button>
       </template>
     </el-table-column>
-    <el-table-column label="浏览次数">
+    <el-table-column label="浏览次数" width="100px">
       <template scope="scope">
         <span>{{scope.row.click_count}}</span>
       </template>
-    </el-table-column>
+    </el-table-column> 
   </el-table>
 </template>
 

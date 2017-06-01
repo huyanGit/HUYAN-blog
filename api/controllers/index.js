@@ -7,13 +7,18 @@ const adminController = require('./admin');
 const commentController = require('./comment');
 const multer = require('multer');
 const uploadController = require('./upload');
+const assertAndSetId = require('../middlewares/database').assertAndSetId;
+const Blog = require('../models').Blog;
+const Tag = require('../models').Tag;
+const Category = require('../models').Category;
 const adminRequired = require('../middlewares').auth.adminRequired;
 router.route('/blog')
 	.get(blogController.getBlogs)
 	.post(adminRequired, blogController.addOneBlog)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
-router.route('/blog/:blogId')
+router.route('/blog/:blogName')
+  .all(assertAndSetId('blogName', Blog))
 	.get(blogController.getOneBlog)
 	.put(adminRequired, blogController.updateOneBlog)
 	.delete(adminRequired, blogController.removeOneBlog)
@@ -24,7 +29,8 @@ router.route('/category')
 	.post(adminRequired, categoryController.addCategory)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
-router.route('/category/:categoryId')
+router.route('/category/:categoryName')
+  .all(assertAndSetId('categoryName', Category))
 	.get(categoryController.getOneCategory)
 	.put(adminRequired, categoryController.updateOneCategory)
 	.delete(adminRequired, categoryController.deleteOneCategory)
@@ -35,7 +41,8 @@ router.route('/tag')
 	.post(adminRequired, tagController.addOneTag)
 	.all(() => {throw new HttpError.MethodNotAllowedError()});
 
-router.route('/tag/:tagId')
+router.route('/tag/:tagName')
+  .all(assertAndSetId('tagName', Tag))
 	.get(tagController.getOneTag)
 	.put(adminRequired, tagController.updateOneTag)
 	.delete(adminRequired, tagController.deleteOneTag)

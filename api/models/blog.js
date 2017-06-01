@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 const BlogSchema = new Schema({
 	title: {type: String},
+	code: {type: String},
 	markdown: {
 			summary: String,
 			body: String
@@ -40,7 +41,7 @@ BlogSchema.statics = {
 	},
 	getBlogArchives: function() {
 		return this.aggregate([
-				{"$project": {"year": {"$year": "$create_at"}, "blog":{"_id":"$_id","create_at": "$create_at", "title": "$title"}}},
+				{"$project": {"year": {"$year": "$create_at"}, "blog":{"_id":"$_id","create_at": "$create_at", "title": "$title", "code": "$code"}}},
 				{"$sort": {"blog.create_at": -1}},
 				{"$group": {"_id": {"year": "$year"}, "blogs": {"$push": "$blog"}}},
 				{"$project": {"_id": 0, "year": "$_id.year", "blogs": 1, "count": {"$size": "$blogs"}}},

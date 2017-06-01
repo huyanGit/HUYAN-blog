@@ -4,8 +4,8 @@ var categoryResource = {
 	getCategories: function(){
 		return instance.get('/category');
 	},
-	getCategoryById: function(categoryId){
-		return instance.get('/category/' + categoryId);
+	getCategoryById: function(categoryName){
+		return instance.get('/category/' + categoryName);
 	}
 };
 

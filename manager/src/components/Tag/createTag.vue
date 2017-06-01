@@ -4,6 +4,9 @@
   <el-form-item label="标签" prop="tag_name" required>
     <el-input v-model="newtag.tag_name" placeholder="标签"></el-input>
   </el-form-item>
+  <el-form-item label="tag" prop="code" required>
+    <el-input v-model="newtag.code" placeholder="tag"></el-input>
+  </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitTag('newtag')">{{submit}}</el-button>
   </el-form-item>
@@ -16,10 +19,12 @@ export default {
   data() {
     return {
       newtag: {
-        tag_name: ''
+        tag_name: '',
+        code: ''
       },
       rules: {
-        tag_name:[{required: true, message:'请输入标签名', trigger:'blur'}]
+        tag_name:[{required: true, message:'请输入标签名', trigger:'blur'}],
+        code:[{required: true, message:'请输入英文标签名', trigger:'blur'}]
       },
       submit:'',
       tag_update_id:''
@@ -31,6 +36,7 @@ export default {
     },
     createOneTag(formName){
       var vm = this;
+      console.log(vm.newtag)
       tagResource.getTags().then(function(res){
         for(let i = 0; i < res.data.length; i++){
           if(res.data[i].tag_name == vm.newtag.tag_name){
@@ -92,8 +98,11 @@ export default {
     },
     getTag_update(){
       var vm = this;
+      console.log(vm.tag_update_id)
       tagResource.getOneTag(vm.tag_update_id).then(function(res){
+        console.log(res.data)
         vm.newtag.tag_name = res.data.tag_name;
+        vm.newtag.code = res.data.code;
       });
     }
   },

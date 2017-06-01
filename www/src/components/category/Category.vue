@@ -2,13 +2,13 @@
   <div class="category">
     <div v-for="item in categories">
     	<div class="category-title">
-    		<router-link :to="'/category/' + item._id" class="category-name">{{item.category_name}}</router-link>
+    		<router-link :to="'/category/' + item.code" class="category-name">{{item.category_name}}</router-link>
     		<span class="blog-number">(共有{{item.count}}篇文章)</span>
     	</div>
     	<div class="blog-list">
     		<div class="blog" v-for="blog in item.blogs">
           <span class="time">{{blog.create_at | timeFilter}} </span>
-    			<router-link :to="'/blog/' + blog._id">{{blog.title}}</router-link>
+    			<router-link :to="'/blog/' + blog.code">{{blog.title}}</router-link>
     		</div>
     	</div>
     </div>

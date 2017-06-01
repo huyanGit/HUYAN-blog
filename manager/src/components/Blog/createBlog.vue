@@ -4,6 +4,9 @@
     <el-form-item label="文章标题" prop="title" required>
       <el-input v-model="newblog.title"></el-input>
     </el-form-item>
+    <el-form-item label="英文标题" prop="code" required>
+      <el-input v-model="newblog.code"></el-input>
+    </el-form-item>
     <el-form-item label="文章分类" prop="category" required>
       <el-select v-model="newblog.category" placeholder="请选择">
         <el-option
@@ -27,7 +30,7 @@
     <el-form-item label="文章概述" prop="markdown.summary" required>
       <el-input
         type="textarea"
-        :autosize="{ minRows: 3, maxRows: 3}"
+        :autosize="{ minRows: 2, maxRows: 2}"
         placeholder="请输入内容"
         v-model="newblog.markdown.summary">
       </el-input>
@@ -35,7 +38,7 @@
     <el-form-item label="文章主体" prop="markdown.body" required>
       <el-input
         type="textarea"
-        :autosize="{ minRows: 6, maxRows: 6}"
+        :autosize="{ minRows: 3, maxRows: 3}"
         placeholder="请输入内容"
         v-model="newblog.markdown.body">
       </el-input>
@@ -69,6 +72,7 @@ export default {
       categories:[],
       rules:{
         title:[{required: true, message:'请输入文章标题', trigger:'blur'}],
+        code:[{required: true, message:'请输英文标题', trigger:'blur'}],
         category:[{required: true, message:'请选择文章分类', trigger:'change'}],
         tags:[{type: 'array', required: true, message:'请选择文章标签', trigger:'change'}]
       }
@@ -130,6 +134,7 @@ export default {
         blog.title = data.title;
         blog.markdown = data.markdown;
         blog.category = data.category._id;
+        blog.code = data.code;
         for(let i = 0; i < data.tags.length; i++){
           blog.tags.push(data.tags[i]._id);
         }

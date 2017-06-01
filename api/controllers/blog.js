@@ -50,4 +50,5 @@ blogController.getArchives = (req, res, next) => {
 		res.success(blogs);
 	}).catch(next);
 }
+
 module.exports = blogController;

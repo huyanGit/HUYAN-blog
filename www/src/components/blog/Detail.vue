@@ -49,8 +49,8 @@ export default{
 	methods: {
 		getBlogById: function(){
 			var vm = this;
-			var blogId = vm.$parent.$route.params.blogId;
-			blogResource.getBlogById(blogId).then(function(res){
+			var blogName = vm.$parent.$route.params.blogName;
+			blogResource.getBlogById(blogName).then(function(res){
 				vm.blog = res.data;
 			});
 		},
@@ -58,7 +58,7 @@ export default{
 			var vm = this;
 			commentResource.getAllComments().then(function(res){
 				for(let i = 0; i < res.data.length; i++){
-					if(res.data[i].blog._id == vm.blog._id){
+					if(res.data[i].blog.code== window.location.pathname.split('/')[2]){
 						vm.comments.push(res.data[i]);
 					}
 				}
@@ -85,9 +85,9 @@ export default{
 			return timeFilter(time).substr(0,10);
 		}
 	},
-	created(){
+	created(){	
 		this.getBlogById();
-		this.getAllComments();
+		this.getAllComments();		
 	}
 }
 </script>

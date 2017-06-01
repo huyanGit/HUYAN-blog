@@ -14,7 +14,7 @@
 		    	<div v-html="blog.html.summary"></div>
 		    </div>
 		    <div class="blog-findall">
-		    	<router-link :to="'/blog/' + blog._id">查看原文</router-link>
+		    	<router-link :to="'/blog/' + blog.code">查看原文</router-link>
 		    </div>
 			</div>
 	  </div>

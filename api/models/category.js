@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 const CategorySchema = new Schema({
 	category_name: {type: String},
+	code: {type: String},	
 	create_at: {type: Date, default: Date.now},
 	update_at: {type: Date, default: Date.now}
 });
@@ -29,7 +30,7 @@ CategorySchema.statics = {
 	getCategoryWithBlogCount: function(){
 		return this.aggregate([
 			{"$lookup": {"from": "blogs", "localField": "_id", "foreignField": "category", "as": "blogs"}},
-			{"$project": {"create_at": 1,"category_name":1, "blogs": 1, "count": {"$size": "$blogs"}}},
+			{"$project": {"code": 1, "create_at": 1,"category_name":1, "blogs": 1, "count": {"$size": "$blogs"}}},
 			{"$sort": {"create_at": -1}}
 			]).exec();
 	}

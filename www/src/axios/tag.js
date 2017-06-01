@@ -4,8 +4,8 @@ var tagResource = {
 	getTags: function(){
 		return instance.get('/tag');
 	},
-	getTagById: function(tagId){
-		return instance.get('/tag/' + tagId);
+	getTagById: function(tagName){
+		return instance.get('/tag/' + tagName);
 	}
 }
 export default tagResource;

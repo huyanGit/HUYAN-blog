@@ -16,7 +16,7 @@
 						<div v-html="blog.html.summary"></div>
 					</div>
 					<div class="blog-findall">
-			    	<router-link :to="'/blog/' + blog._id">查看原文</router-link>
+			    	<router-link :to="'/blog/' + blog.code">查看原文</router-link>
 			    </div>
 		    </div>
 	    </div>
@@ -39,8 +39,8 @@ export default{
 	methods:{
 		getTagById: function(tagId){
 			var vm = this;
-			var tagId = vm.$parent.$route.params.tagId;
-			return tagResource.getTagById(tagId).then(function(res){
+			var tagName = vm.$parent.$route.params.tagName;
+			return tagResource.getTagById(tagName).then(function(res){
 				vm.tag = res.data;
 			});
 		},

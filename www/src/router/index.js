@@ -14,11 +14,11 @@ Vue.use(Router);
 
 const routes = [
 	{ path: '/', component: Blog, meta: {title:'HUYAN-BLOG'}},
-	{ path: '/blog/:blogId', component: Detail, meta: {title:'Blog-detail'}},
+	{ path: '/blog/:blogName', component: Detail, meta: {title:'Blog-detail'}},
 	{ path: '/category', component: Category, meta: {title:'Category'}},
-	{ path: '/category/:categoryId', component: CategoryWithBlogs, meta: {title:'Category-detail'}},
+	{ path: '/category/:categoryName', component: CategoryWithBlogs, meta: {title:'Category-detail'}},
 	{ path: '/tag', component: Tag, meta: {title:'Tag'}},
-	{ path: '/tag/:tagId', component: TagWithBlogs, meta: {title:'Tag-detail'}},
+	{ path: '/tag/:tagName', component: TagWithBlogs, meta: {title:'Tag-detail'}},
 	{ path: '/archive', component: Archive, meta: {title:'Archive'}},
 	{ path: '/about', component: About, meta: {title:'About'}},
 	{ path:'/*', component: Notfound, meta: {title:'404'}}				

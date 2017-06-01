@@ -4,6 +4,9 @@
   <el-form-item label="分类" prop="category_name" required>
     <el-input v-model="newcategory.category_name" placeholder="分类"></el-input>
   </el-form-item>
+  <el-form-item label="category" prop="code" required>
+    <el-input v-model="newcategory.code" placeholder="category"></el-input>
+  </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitCategory('newcategory')">{{submit}}</el-button>
   </el-form-item>
@@ -16,10 +19,12 @@ export default {
   data() {
     return {
       newcategory: {
-        category_name: ''
+        category_name: '',
+        code: ''
       },
       rules:{
-        category_name:[{required:true, message:'请输入标签名', trigger:'blur'}]
+        category_name:[{required:true, message:'请输入标签名', trigger:'blur'}],
+        code:[{required:true, message:'请输入英文标签名', trigger:'blur'}]
       },
       submit:'',
       category_update_id:''
@@ -92,7 +97,9 @@ export default {
     getCategory_update(){
       var vm = this;
       categoryResource.getOneCategory(vm.category_update_id).then(function(res){
+        console.log(res.data)
         vm.newcategory.category_name = res.data.category_name;
+        vm.newcategory.code = res.data.code;
       })
     }
   },

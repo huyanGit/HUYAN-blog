@@ -15,7 +15,7 @@
 					<div v-html="blog.html.summary"></div>
 				</div>
 				<div class="blog-findall">
-		    	<router-link :to="'/blog/' + blog._id">查看原文</router-link>
+		    	<router-link :to="'/blog/' + blog.code">查看原文</router-link>
 		    </div>
 	    </div>
 		</div>
@@ -37,8 +37,8 @@ export default{
 	methods:{
 		getCategoryById: function(categoryId){
 			var vm = this;
-			var categoryId = vm.$parent.$route.params.categoryId;
-			return categoryResource.getCategoryById(categoryId).then(function(res){
+			var categoryName = vm.$parent.$route.params.categoryName;
+			return categoryResource.getCategoryById(categoryName).then(function(res){
 				vm.category = res.data;
 			});
 		},
