@@ -30,7 +30,7 @@ BlogSchema.statics = {
 		return this.find(query, {'markdown': 0, 'html.body': 0}, obt).populate(['category', 'tags']).exec();
 	},
 	findBlogById: function (blogId) {
-		return this.findById(blogId).populate(['category', 'tags']).exec();
+		return this.findById(blogId).exec();
 	},
 	updateBlog: function (blog) {
 		return blog.save();
