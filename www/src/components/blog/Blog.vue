@@ -3,7 +3,7 @@
 	  <div class="blog-list" v-for = "blog in blogs">
 			<div class="blog">
 				<div class="blog-head">
-					<div class="blog-title"><router-link :to="'/blog/' + blog._id">{{blog.title}}</router-link></div>
+					<div class="blog-title"><router-link :to="'/blog/' + blog.code">{{blog.title}}</router-link></div>
 			    <div class="b_data">
 			    	<span class="b_span"><span class="glyphicon glyphicon-book"></span><span class="icon">{{blog.category.category_name}}</span></span>
 			    	<span class="b_span"><span class="glyphicon glyphicon-calendar"></span><span class="icon">{{blog.create_at | timeFilter}}</span></span>

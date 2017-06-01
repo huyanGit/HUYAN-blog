@@ -4,7 +4,7 @@
 		<div class="category-blog" v-for="(blog, index) in blogs">
 			<div v-if="blog.category.category_name == category.category_name" class="blog-list">			
 				<div class="blog-head">
-					<router-link :to="'/blog/' + blog._id" class="blog-title">{{blog.title}}</router-link :to="'/blog/' + blog._id">
+					<router-link :to="'/blog/' + blog.code" class="blog-title">{{blog.title}}</router-link>
 					<div class="b_data">
 						<span><span class="glyphicon glyphicon-book"></span><span class="icon">{{blog.category.category_name}}</span></span>
 			    	<span><span class="glyphicon glyphicon-calendar"></span><span class="icon">{{blog.create_at | timeFilter}}</span></span>
