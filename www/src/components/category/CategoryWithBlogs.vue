@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="category-head">标签『{{category.category_name}}』<span class="blog-number">(共有{{category_count}}篇文章)</span></div>
+		<div class="category-head">标签『{{category.category_name}}』<span class="blog-number">(共有{{count}}篇文章)</span></div>
 		<div class="category-blog" v-for="(blog, index) in blogs">
 			<div v-if="blog.category.category_name == category.category_name" class="blog-list">			
 				<div class="blog-head">
@@ -23,47 +23,21 @@
 </template>
 
 <script>
-import {timeFilter} from '../../utils/filters'
-import categoryResource from '../../axios/category'
-import blogResource from '../../axios/blog'
+import { mapState, mapGetters } from 'vuex'
 export default{
-	data(){
-		return {
-			category:{},
-			blogs:[],
-			category_count:''
-		}
-	},
-	methods:{
-		getCategoryById: function(categoryId){
-			var vm = this;
-			var categoryName = vm.$parent.$route.params.categoryName;
-			return categoryResource.getCategoryById(categoryName).then(function(res){
-				vm.category = res.data;
-			});
-		},
-		getBlogs: function(){
-			var vm = this;
-			return blogResource.getBlogs().then(function(res){
-				vm.blogs = res.data;
-				let count = 0;
-				for(let i = 0; i < vm.blogs.length; i++){
-					if(vm.blogs[i].category.category_name === vm.category.category_name){
-						count++;
-					}
-				}
-				vm.category_count = count;
-			});
-		}
-	},
-	filters:{
-  	timeFilter: function(time){
-  		return timeFilter(time).substr(0, 10);
-  	}
+	computed: {
+		...mapState({
+			category: state => state.category.category,
+			blogs: state => state.blog.blogs
+		}),
+		...mapGetters({
+			count: 'countByCategory'
+		})
 	},
 	created(){
-		this.getCategoryById();
-		this.getBlogs();
+		const categoryName = this.$parent.$route.params.categoryName
+		this.$store.dispatch('getOneCategory', categoryName)
+		this.$store.dispatch('getAllBlogs')
 	}
 }
 </script>

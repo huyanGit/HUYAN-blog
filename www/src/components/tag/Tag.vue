@@ -8,23 +8,13 @@
 </template>
 
 <script>
-import tagResource from '../../axios/tag'
+import { mapState } from 'vuex'
 export default {
-  data () {
-    return {
-      tags: []
-    }
-  },
-  methods: {
-  	getTags: function(){
-  		var vm = this;
-  		return tagResource.getTags().then(function(res){
-  			vm.tags = res.data;
-  		});
-  	}
-  },
+  computed: mapState({
+    tags: state => state.tag.tags
+  }),
   created(){
-  	return this.getTags();
+  	this.$store.dispatch('getTags')
   }
 }
 </script>

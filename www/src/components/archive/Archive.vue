@@ -13,29 +13,13 @@
 </template>
 
 <script>
-import archiveResource from '../../axios/archive'
-import {timeFilter} from '../../utils/filters'
+import { mapState } from 'vuex'
 export default {
-  data () {
-    return {
-      archives: []
-    }
-  },
-  methods: {
-    getArchives: function(){
-      var vm = this;
-      archiveResource.getArchives().then(function(res){
-        vm.archives = res.data;
-      });
-    }
-  },
-  filters:{
-    timeFilter: function(time){
-      return timeFilter(time).substr(0,10);
-    }
-  },
+  computed: mapState({
+    archives: state => state.archive.archives
+  }),
   created(){
-    return this.getArchives();
+    this.$store.dispatch('getArchives')
   }
 }
 </script>

@@ -1,0 +1,18 @@
+//blog
+export const LOAD_BLOG_LIST = 'LOAD_BLOG_LIST'
+export const GET_ONE_BLOG = 'GET_ONE_BLOG'
+export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS'
+export const ADD_COMMENT = 'ADD_COMMENT'
+export const ADD_COMMENT_TO_BLOG = 'ADD_COMMENT_TO_BLOG'
+export const CLEAR_COMMENT_CONTENT = 'CLEAR_COMMENT_CONTENT'
+
+//tag
+export const LOAD_TAG_LIST = 'LOAD_TAG_LIST'
+export const GET_ONE_TAG = 'GET_ONE_TAG'
+
+//category
+export const LOAD_CATEGORY_LIST = 'LOAD_CATEGORY_LIST'
+export const GET_ONE_CATEGORY = 'GET_ONE_CATEGORY'
+
+//archive
+export const LOAD_ARCHIVE_LIST = 'LOAD_ARCHIVE_LIST'

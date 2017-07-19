@@ -22,34 +22,17 @@
 </template>
 
 <script>
-import blogResource from '../../axios/blog'
-import {timeFilter} from '../../utils/filters'
+import { mapState } from 'vuex'
 export default {
-  data () {
-    return {
-      blogs: []
-    }
-  },
-  methods: {
-  	getBlogs: function(){
-  		var vm = this;
-  		blogResource.getBlogs().then(function(res){
-  			vm.blogs = res.data;
-  		});
-  	}
-  },
-  filters: {
-  	timeFilter: function(time){
-  		return timeFilter(time).substr(0, 10);
-  	}
-  },
+	computed: mapState({
+		blogs: state => state.blog.blogs
+	}),
   created() {
-  	return this.getBlogs();
+  	this.$store.dispatch('getAllBlogs')
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .blog-list{
 	width: inherit;

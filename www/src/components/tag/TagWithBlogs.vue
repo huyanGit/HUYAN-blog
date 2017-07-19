@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="tag-head">标签『{{tag.tag_name}}』<span class="blog-number">(共有{{tag_count}}篇文章)</span></div>
+		<div class="tag-head">标签『{{tag.tag_name}}』<span class="blog-number">(共有{{count}}篇文章)</span></div>
 		<div class="tag-blog" v-for="blog in blogs">
 			<div v-for="_tag in blog.tags">
 				<div v-if="_tag.tag_name == tag.tag_name" class="blog-list">			
@@ -25,49 +25,21 @@
 </template>
 
 <script>
-import {timeFilter} from '../../utils/filters'
-import tagResource from '../../axios/tag'
-import blogResource from '../../axios/blog'
+import { mapState, mapGetters } from 'vuex'
 export default{
-	data(){
-		return {
-			tag:{},
-			blogs:[],
-			tag_count:''
-		}
-	},
-	methods:{
-		getTagById: function(tagId){
-			var vm = this;
-			var tagName = vm.$parent.$route.params.tagName;
-			return tagResource.getTagById(tagName).then(function(res){
-				vm.tag = res.data;
-			});
-		},
-		getBlogs: function(){
-			var vm = this;
-			return blogResource.getBlogs().then(function(res){
-				vm.blogs = res.data;
-				let count = 0;
-				for(let i = 0; i < vm.blogs.length; i++){
-					for(let j = 0; j < vm.blogs[i].tags.length; j++){
-						if(vm.blogs[i].tags[j].tag_name === vm.tag.tag_name){
-							count++;
-						}
-					}
-				}
-				vm.tag_count = count;
-			});
-		}
-	},
-	filters:{
-  	timeFilter: function(time){
-  		return timeFilter(time).substr(0, 10);
-  	}
+	computed: {
+		...mapState({
+			tag: state => state.tag.tag,
+			blogs: state => state.blog.blogs
+		}),
+		...mapGetters({
+			count: 'countByTag'
+		})
 	},
 	created(){
-		this.getTagById();
-		this.getBlogs();
+		const tagName = this.$parent.$route.params.tagName
+		this.$store.dispatch('getOneTag', tagName)
+		this.$store.dispatch('getAllBlogs')
 	}
 }
 </script>

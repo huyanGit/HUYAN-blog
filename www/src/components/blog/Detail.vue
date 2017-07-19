@@ -31,48 +31,17 @@
 </template>
 
 <script>
-import blogResource from '../../axios/blog'
+import { mapState } from 'vuex'
 import commentResource from '../../axios/comment'
-import {timeFilter} from '../../utils/filters'
 export default{
-	data(){
-		return {
-			blog: {},
-			comments:[],
-			comment: {
-				user:'',
-				content:'',
-				blog:''
-			}
-		}
-	},
+	computed: mapState({
+		blog: state => state.blog.blogDetail,
+		comments: state => state.blog.comments,
+		comment: state => state.blog.comment
+	}),
 	methods: {
-		getBlogById: function(){
-			var vm = this;
-			var blogName = vm.$parent.$route.params.blogName;
-			blogResource.getBlogById(blogName).then(function(res){
-				vm.blog = res.data;
-			});
-		},
-		getAllComments: function(){
-			var vm = this;
-			commentResource.getAllComments().then(function(res){
-				for(let i = 0; i < res.data.length; i++){
-					if(res.data[i].blog.code== window.location.pathname.split('/')[2]){
-						vm.comments.push(res.data[i]);
-					}
-				}
-			});
-		},
 		submit: function(){
-			var vm = this;
-			vm.comment.blog = vm.blog._id;
-			if(vm.comment.user != '' && vm.comment.content != ''){
-				commentResource.createComment(vm.comment).then(function(res){
-					vm.comments.push(res.data);
-					vm.comment.content = '';
-				});
-			}
+			this.$store.dispatch('addComment');
 		},
 		reply: function(index){
 			var vm = this;
@@ -80,14 +49,10 @@ export default{
 			vm.comment.content = '@' + user;
 		}
 	},
-	filters:{
-		timeFilter: function(time) {
-			return timeFilter(time).substr(0,10);
-		}
-	},
-	created(){	
-		this.getBlogById();
-		this.getAllComments();		
+	created(){
+		const blogName = this.$parent.$route.params.blogName	
+		this.$store.dispatch('getOneBlog', blogName)
+		this.$store.dispatch('getComments', blogName)
 	}
 }
 </script>

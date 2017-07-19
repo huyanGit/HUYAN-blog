@@ -16,34 +16,17 @@
 </template>
 
 <script>
-import categoryResource from '../../axios/category'
-import {timeFilter} from '../../utils/filters'
+import { mapState } from 'vuex'
 export default {
-  data () {
-    return {
-      categories:[]
-    }
-  },
-  methods: {
-    getCategories: function () {
-      var vm = this;
-      return categoryResource.getCategories().then(function(res){
-        vm.categories = res.data;
-      });
-    }
-  },
-  filters: {
-    timeFilter: function(time){
-      return timeFilter(time).substr(0,10);
-    }
-  },
+  computed: mapState({
+    categories: state => state.category.categories
+  }),
   created(){
-    return this.getCategories();
+    this.$store.dispatch('getAllCategories')
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .category-name{
 	font-size: 22px;
